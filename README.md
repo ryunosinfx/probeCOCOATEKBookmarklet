@@ -7,7 +7,7 @@ A bookmarklet for probing COCOA TEK
 
 - Bookmarkletを登録します。
 - 自分のTEKファイルをアプリから保存します
-- https://ikarus.sg/how-i-built-kraken/ を開きます。
+- https://covid19radar-jpn-prod.azureedge.net/ を開きます。→400エラーのページが開きます。
 - Bookmarkletを実行します
 - 自分のTEKファイルを投稿します
 - 結果を確認します。
