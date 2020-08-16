@@ -1,0 +1,47 @@
+{
+	"name": "probecocoatekbookmarklet",
+	"version": "0.0.1",
+	"description": "a bookmarklet for probing cocoa tek files.",
+	"main": "index.js",
+	"scripts": {
+		"start": "webpack-dev-server --hot --inline --progress --colors --mode development",
+		"build": "webpack --progress --colors --mode production",
+		"test": "node_modules/.bin/mocha --require @babel/register test/**/*.test.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ryunosinfx/probeCOCOATEKBookmarklet.git"
+	},
+	"author": "ryunosinfx2 <ryunosinfxxul@gmail.com> (https://github.com/ryunosinfx)",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/ryunosinfx/probeCOCOATEKBookmarklet/issues"
+	},
+	"babel": {
+		"presets": [
+			"@babel/preset-env"
+		]
+	},
+	"browserslist": "last 2 versions, not dead, not ie > 0",
+	"homepage": "https://github.com/ryunosinfx/probeCOCOATEKBookmarklet#readme",
+	"devDependencies": {
+		"@babel/core": "^7.11.1",
+		"@babel/preset-env": "^7.11.0",
+		"babel-loader": "^8.1.0",
+		"chai": "^4.2.0",
+		"copy-webpack-plugin": "^6.0.3",
+		"css-loader": "^4.2.1",
+		"html-webpack-plugin": "^4.3.0",
+		"mocha": "^8.1.1",
+		"mocha-loader": "^5.1.2",
+		"style-loader": "^1.2.1",
+		"vue-loader": "^15.9.3",
+		"vue-template-compiler": "^2.6.11",
+		"webpack": "^4.44.1",
+		"webpack-cli": "^3.3.12",
+		"webpack-dev-server": "^3.11.0"
+	},
+	"dependencies": {
+		"vue": "^2.6.11"
+	}
+}

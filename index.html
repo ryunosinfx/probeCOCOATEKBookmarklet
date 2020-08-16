@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=480,initial-scale=1.5" />
+		<title>robeCOCOA TEK Bookmarklet</title>
+	</head>
+	<body>
+		<h1>probeCOCOA TEK Bookmarklet</h1>
+		<div>
+			<p><a id="bookmarkletAncker" href="javascrpt:void(0) ">bookmarklet</a></p>
+			<textarea id="bookmarkletSource"> </textarea>
+		</div>
+		<script>
+			const url = location.href;
+			const d = document;
+			const a = d.getElementById('bookmarkletAncker');
+			const s = (event) => {
+				const t = event.target;
+				a.href = `javascript:(()=>{${t.value}})()`;
+			};
+			const t = d.getElementById('bookmarkletSource');
+			t.addEventListener('input', s);
+			t.value = `const l = (s, cb)=>{
+  const d=document;
+  const p = d.createElement('script');
+  d.head.appendChild(p);
+  p.onload = cb;
+  p.src = s;
+};
+l('${url}/bundle.js');`;
+			setTimeout(() => {
+				const event = new Event('input');
+				t.dispatchEvent(event);
+			});
+		</script>
+	</body>
+</html>
