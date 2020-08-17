@@ -36,9 +36,23 @@
 	  d.appendChild(h);
   	  console.log(h);
   }
-  const h = d.getElementsByTagName('head')[0];
-  h.appendChild(p);
-  	  console.log(s);
+  const f=async (path, ct = 'application/javascript') =>{
+		const r = {
+			method: 'GET',
+			mode: 'cors' ,
+			cache: 'no-cache',
+			credentials: 'omit',
+			redirect: 'follow',
+			referrer: 'no-referrer',
+			headers: {'Content-Type': ct,},
+		};
+		console.log(path);
+		console.log(r);
+		const res=await fetch(path, r);
+		return await res.text();
+	};
+	const t=(text)=>{eval(text);};
+	f(s).then(t);
 };
 l('${url}dist/bundle.js');`;
 			setTimeout(() => {
