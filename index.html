@@ -26,6 +26,7 @@
   const e = d.getElementsByTagName('Error')[0];
   console.log(e);
   const p = d.createElement('script');
+  p.setAttribute("src",s);
   if(!d.head || e){
 	  d.removeChild(e);
 	  const h = d.createElement('html');
@@ -37,7 +38,6 @@
   }
   const h = d.getElementsByTagName('head')[0];
   h.appendChild(p);
-  p.src = s;
   	  console.log(s);
 };
 l('${url}dist/bundle.js');`;
