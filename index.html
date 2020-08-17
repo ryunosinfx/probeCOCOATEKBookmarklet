@@ -21,12 +21,24 @@
 			};
 			const t = d.getElementById('bookmarkletSource');
 			t.addEventListener('input', s);
-			t.value = `const l = (s, cb)=>{
+			t.value = `const l = (s)=>{
   const d=document;
+  const e = d.getElementsByTagName('Error')[0];
+  console.log(e);
   const p = d.createElement('script');
-  d.head.appendChild(p);
-  p.onload = cb;
+  if(!d.head || e){
+	  d.removeChild(e);
+	  const h = d.createElement('html');
+	  const head = d.createElement('head');
+	  h.appendChild(head);
+	  h.appendChild(d.createElement('body'));
+	  d.appendChild(h);
+  	  console.log(h);
+  }
+  const h = d.getElementsByTagName('head')[0];
+  h.appendChild(p);
   p.src = s;
+  	  console.log(s);
 };
 l('${url}/bundle.js');`;
 			setTimeout(() => {

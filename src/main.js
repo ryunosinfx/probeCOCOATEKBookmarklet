@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import vuetify from './plugins/vuetify';
 
 import App from './Main';
 
@@ -17,4 +18,5 @@ new Vue({
 	el: '#' + targetId, // アプリをマウントする要素(セレクタで指定)
 	components: { App }, // Appというコンポーネントを使うよ、という宣言
 	template: '<app/>', // el(今回は#app)の中に表示する内容
+	vuetify,
 });

@@ -20,10 +20,10 @@ module.exports = {
 	},
 	module: {
 		rules: [
-			{
-				test: /\.css$/,
-				loader: 'style-loader!css-loader?importLoaders=1&camelCase',
-			},
+			// {
+			// 	test: /\.css$/,
+			// 	loader: 'style-loader!css-loader?importLoaders=1&camelCase',
+			// },
 			{
 				test: /\.vue$/,
 				loader: 'vue-loader',
@@ -43,6 +43,30 @@ module.exports = {
 					options: {},
 				},
 				exclude: /node_modules/,
+			},
+			{
+				test: /\.s(c|a)ss$/,
+				use: [
+					'vue-style-loader',
+					'css-loader',
+					{
+						loader: 'sass-loader',
+						// Requires sass-loader@^7.0.0
+						options: {
+							implementation: require('sass'),
+							fiber: require('fibers'),
+							indentedSyntax: true, // optional
+						},
+						// Requires sass-loader@^8.0.0
+						options: {
+							implementation: require('sass'),
+							sassOptions: {
+								fiber: require('fibers'),
+								indentedSyntax: true, // optional
+							},
+						},
+					},
+				],
 			},
 		],
 	},
