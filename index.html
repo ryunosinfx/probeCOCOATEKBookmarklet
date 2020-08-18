@@ -13,6 +13,7 @@
 		</div>
 		<script>
 			const url = location.href;
+			const origin = location.origin;
 			const d = document;
 			const a = d.getElementById('bookmarkletAncker');
 			const s = (event) => {
@@ -22,42 +23,63 @@
 			const t = d.getElementById('bookmarkletSource');
 			t.addEventListener('input', s);
 			t.value = `const l = (s)=>{
-  const d=document;
-  const e = d.getElementsByTagName('Error')[0];
-  console.log(e);
-  const p = d.createElement('script');
-  p.setAttribute("src",s);
-  if(!d.head || e){
-	  d.removeChild(e);
-	  const h = d.createElement('html');
-	  const head = d.createElement('head');
-	  h.appendChild(head);
-	  h.appendChild(d.createElement('body'));
-	  d.appendChild(h);
-  	  console.log(h);
-  }
-  const f=async (path, ct = 'application/javascript') =>{
-		const r = {
-			method: 'GET',
-			mode: 'cors' ,
-			cache: 'no-cache',
-			credentials: 'omit',
-			redirect: 'follow',
-			referrer: 'no-referrer',
-			headers: {'Content-Type': ct,},
-		};
-		console.log(path);
-		console.log(r);
-		const res=await fetch(path, r);
-		return await res.text();
-	};
-	const t=(text)=>{eval(text);};
-	f(s).then(t);
-};
-l('${url}dist/bundle.js');`;
+			  const d=document;
+			  const e = d.getElementsByTagName('Error')[0];
+			  console.log(e);
+			  const p = d.createElement('script');
+			  p.setAttribute("src",s);
+			  if(!d.head || e){
+				  d.removeChild(e);
+				  const h = d.createElement('html');
+				  const head = d.createElement('head');
+				  h.appendChild(head);
+				  h.appendChild(d.createElement('body'));
+				  d.appendChild(h);
+			  	  console.log(h);
+			  }
+			  const f=(e)=>{
+				  if(e.origin==='${origin}')return;
+				  eval(e.data);
+			  };
+				const i = d.createElement('iframe');
+				i.setAttribute('id', id);
+				i.setAttribute('src', '${url}');
+				i.setAttribute('height', 0);
+				i.setAttribute('width', 0);
+
+				window.addEventListener('message', f, false);
+				i.postMessage({}, '*', );
+			};
+			l('${url}dist/bundle.js');`;
 			setTimeout(() => {
 				const event = new Event('input');
 				t.dispatchEvent(event);
+			});
+			const f = async (path, ct = 'application/javascript') => {
+				const r = {
+					method: 'GET',
+					mode: 'cors',
+					cache: 'no-cache',
+					credentials: 'omit',
+					redirect: 'follow',
+					referrer: 'no-referrer',
+					headers: { 'Content-Type': ct },
+				};
+				console.log(path);
+				console.log(r);
+				const res = await fetch(path, r);
+				return await res.text();
+			};
+			const targetOrigin = 'https://covid19radar-jpn-prod.azureedge.net/';
+			f(s).then((t) => {
+				const m = (e) => {
+					if (e.origin !== targetOrigin) return;
+					const wp = window.parent;
+					if (wp) {
+						wp.postMessage(t, targetOrigin);
+					}
+				};
+				window.addEventListener('message', m, false);
 			});
 		</script>
 	</body>
