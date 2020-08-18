@@ -41,18 +41,18 @@
 			  const b=d.getElementsByTagName('body')[0];
 			  h.appendChild(p);
 			  const f=(e)=>{
-				  alert("aaaa")
+				  alert("aaaa");
 				  if(e.origin==='${origin}')return;
 				  eval(e.data);
 			  };
 			  const i = d.createElement('iframe');
 			  b.appendChild(i);
-			  i.setAttribute('src', '${url}');
-			  i.setAttribute('height', 0);
-			  i.setAttribute('width', 0);
 			  i.onload=()=>{
 			  	i.contentWindow.postMessage({}, '*');
 			  };
+			  i.setAttribute('src', '${url}');
+			  i.setAttribute('height', 0);
+			  i.setAttribute('width', 0);
 			  window.addEventListener('message', f, false);
 			};
 			l();`;
@@ -78,6 +78,7 @@
 			const targetOrigin = 'https://covid19radar-jpn-prod.azureedge.net/';
 			f(`${url}dist/bundle.js`).then((t) => {
 				const m = (e) => {
+					alert(e);
 					if (e.origin !== targetOrigin) return;
 					const wp = window.parent;
 					if (wp) {
