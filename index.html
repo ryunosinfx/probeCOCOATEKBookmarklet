@@ -22,7 +22,7 @@
 			};
 			const t = d.getElementById('bookmarkletSource');
 			t.addEventListener('input', s);
-			t.value = `const l = (s)=>{
+			t.value = `const l = ()=>{
 			  const d=document;
 			  const e = d.getElementsByTagName('Error')[0];
 			  console.log(e);
@@ -50,7 +50,7 @@
 				window.addEventListener('message', f, false);
 				i.postMessage({}, '*', );
 			};
-			l('${url}dist/bundle.js');`;
+			l();`;
 			setTimeout(() => {
 				const event = new Event('input');
 				t.dispatchEvent(event);
@@ -71,7 +71,7 @@
 				return await res.text();
 			};
 			const targetOrigin = 'https://covid19radar-jpn-prod.azureedge.net/';
-			f(s).then((t) => {
+			f(`${url}dist/bundle.js`).then((t) => {
 				const m = (e) => {
 					if (e.origin !== targetOrigin) return;
 					const wp = window.parent;
