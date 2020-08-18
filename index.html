@@ -41,6 +41,7 @@
 			  const b=d.getElementsByTagName('body')[0];
 			  h.appendChild(p);
 			  const f=(e)=>{
+				  alert("aaaa")
 				  if(e.origin==='${origin}')return;
 				  eval(e.data);
 			  };
@@ -51,7 +52,7 @@
 			  i.setAttribute('width', 0);
 			  i.onload=()=>{
 			  	i.contentWindow.postMessage({}, '*');
-			  }
+			  };
 			  window.addEventListener('message', f, false);
 			};
 			l();`;
