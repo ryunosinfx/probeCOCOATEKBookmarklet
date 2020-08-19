@@ -79,7 +79,8 @@
 			f(`${url}dist/bundle.js`).then((t) => {
 				console.log('A01');
 				const m = (e) => {
-					alert(e);
+					console.log('B01 e:' + e);
+					console.log(e);
 					if (e.origin !== targetOrigin) return;
 					const wp = window.parent;
 					if (wp) {
