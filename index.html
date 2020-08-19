@@ -25,9 +25,7 @@
 			t.value = `const l=()=>{
 			  const d=document;
 			  const e = d.getElementsByTagName('Error')[0];
-			  console.log(e);
-			  const p = d.createElement('script');
-			  p.setAttribute("src",s);
+			  console.log('e:'+e);
 			  if(!d.head || e){
 				  d.removeChild(e);
 				  const h = d.createElement('html');
@@ -39,7 +37,6 @@
 			  }
 			  const h=d.getElementsByTagName('head')[0];
 			  const b=d.getElementsByTagName('body')[0];
-			  h.appendChild(p);
 			  const f=(e)=>{
 				  alert("aaaa");
 				  if(e.origin==='${origin}')return;
@@ -53,6 +50,7 @@
 			  i.setAttribute('src', '${url}');
 			  i.setAttribute('height', 0);
 			  i.setAttribute('width', 0);
+			  console.log('C01');
 			  window.addEventListener('message', f, false);
 			};
 			l();`;
