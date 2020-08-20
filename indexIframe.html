@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=480,initial-scale=1.5" />
+		<title>robeCOCOA TEK Bookmarklet</title>
+	</head>
+	<body>
+		<h1>probeCOCOA TEK Bookmarklet</h1>
+		<div>
+			<p><a id="bookmarkletAncker" href="javascrpt:void(0) ">bookmarklet</a></p>
+			<textarea id="bookmarkletSource"> </textarea>
+		</div>
+		<script>
+			const url = location.href;
+			const origin = location.origin;
+			const d = document;
+			const a = d.getElementById('bookmarkletAncker');
+			const s = (event) => {
+				const t = event.target;
+				a.href = `javascript:(()=>{${t.value}})()`;
+			};
+			const t = d.getElementById('bookmarkletSource');
+			t.addEventListener('input', s);
+			const o = `const l=()=>{
+			  const d=document;
+			  const e = d.getElementsByTagName('Error')[0];
+			  console.log('eA:'+e);
+			  if(!d.head || e){
+				  d.removeChild(e);
+				  const h = d.createElement('html');
+				  h.setAttribute("xmlns","http://www.w3.org/1999/xhtml");
+				  const head = d.createElement('head');
+				  h.appendChild(head);
+				  h.appendChild(d.createElement('body'));
+				  d.appendChild(h);
+			  	  console.log(h);
+			  }
+			  const h=d.getElementsByTagName('head')[0];
+			  const b=d.getElementsByTagName('body')[0];
+			  const f=(e)=>{
+				  alert("aaaa");
+				  if(e.origin==='${origin}')return;
+				  eval(e.data);
+			  };
+			  const i = d.createElement('iframe');
+			  b.appendChild(i);
+			  i.onload=()=>{
+			  	i.contentWindow.postMessage({}, '*');
+			  };
+			  i.setAttribute('src', '${url}');
+			  i.setAttribute('height', 0);
+			  i.setAttribute('width', 0);
+			  console.log('C01');
+			  window.addEventListener('message', f, false);
+			};Fa
+			l();`;
+			t.value = o
+				.split('\t')
+				.join('')
+				.split('\n')
+				.join('');
+			setTimeout(() => {
+				const event = new Event('input');
+				t.dispatchEvent(event);
+			});
+			const f = async (path, ct = 'application/javascript') => {
+				const r = {
+					method: 'GET',
+					mode: 'cors',
+					cache: 'no-cache',
+					credentials: 'omit',
+					redirect: 'follow',
+					referrer: 'no-referrer',
+					headers: { 'Content-Type': ct },
+				};
+				console.log(path);
+				console.log(r);
+				const res = await fetch(path, r);
+				return await res.text();
+			};
+			const targetOrigin = 'https://covid19radar-jpn-prod.azureedge.net/';
+			f(`${url}dist/bundle.js`).then((t) => {
+				console.log('A01');
+				const m = (e) => {
+					console.log('B01 e:' + e);
+					console.log(e);
+					if (e.origin !== targetOrigin) return;
+					const wp = window.parent;
+					if (wp) {
+						wp.postMessage(t, targetOrigin);
+					}
+				};
+				window.addEventListener('message', m, false);
+				console.log('A02');
+			});
+		</script>
+	</body>
+</html>

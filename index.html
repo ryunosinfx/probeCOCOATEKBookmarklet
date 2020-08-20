@@ -22,43 +22,6 @@
 			};
 			const t = d.getElementById('bookmarkletSource');
 			t.addEventListener('input', s);
-			t.value = `const l=()=>{
-			  const d=document;
-			  const e = d.getElementsByTagName('Error')[0];
-			  console.log('e:'+e);
-			  if(!d.head || e){
-				  d.removeChild(e);
-				  const h = d.createElement('html');
-				  h.setAttribute("xmlns","http://www.w3.org/1999/xhtml");
-				  const head = d.createElement('head');
-				  h.appendChild(head);
-				  h.appendChild(d.createElement('body'));
-				  d.appendChild(h);
-			  	  console.log(h);
-			  }
-			  const h=d.getElementsByTagName('head')[0];
-			  const b=d.getElementsByTagName('body')[0];
-			  const f=(e)=>{
-				  alert("aaaa");
-				  if(e.origin==='${origin}')return;
-				  eval(e.data);
-			  };
-			  const i = d.createElement('iframe');
-			  b.appendChild(i);
-			  i.onload=()=>{
-			  	i.contentWindow.postMessage({}, '*');
-			  };
-			  i.setAttribute('src', '${url}');
-			  i.setAttribute('height', 0);
-			  i.setAttribute('width', 0);
-			  console.log('C01');
-			  window.addEventListener('message', f, false);
-			};
-			l();`;
-			setTimeout(() => {
-				const event = new Event('input');
-				t.dispatchEvent(event);
-			});
 			const f = async (path, ct = 'application/javascript') => {
 				const r = {
 					method: 'GET',
@@ -74,19 +37,86 @@
 				const res = await fetch(path, r);
 				return await res.text();
 			};
-			const targetOrigin = 'https://covid19radar-jpn-prod.azureedge.net/';
-			f(`${url}dist/bundle.js`).then((t) => {
-				console.log('A01');
-				const m = (e) => {
-					console.log('B01 e:' + e);
-					console.log(e);
-					if (e.origin !== targetOrigin) return;
-					const wp = window.parent;
-					if (wp) {
-						wp.postMessage(t, targetOrigin);
+			const to64 = (s) => {
+				const u = new Uint16Array(s.length);
+				for (let i = 0; i < u.length; i++) {
+					u[i] = s.charCodeAt(i);
+				}
+				const c = String.fromCharCode(...new Uint8Array(u.buffer));
+				return btoa(c);
+			};
+			f(`${url}dist/bookmarklet.js`).then((s) => {
+				const sb64 = to64(s);
+				const o = `const l=()=>{
+				const f=(e)=>{
+					const a=atob(e);
+  					const b=new Uint8Array(a.length);
+					for(let i=0;i<b.length;i++){
+						b[i]=a.charCodeAt(i);
 					}
+  					return String.fromCharCode(...new Uint16Array(b.buffer));
 				};
-				window.addEventListener('message', m, false);
+				const ns='http://www.w3.org/1999/xhtml';
+				const d=document;
+				const e=d.getElementsByTagName('Error')[0];
+				if(!d.head||(e&&!e.parentNode)){
+					console.log(e);
+					console.log(e);
+					console.log("d");
+					console.log(d);
+					d.removeChild(e);
+					const dt=d.implementation.createDocumentType("html","","");
+					const doc=d.implementation.createDocument(ns, 'html', dt);
+					const h=doc.createElementNS(ns, 'head');
+					const b=doc.createElementNS(ns, 'body');
+					const m=doc.documentElement;
+					m.appendChild(h);
+					m.appendChild(b);
+					d.appendChild(m,true);
+					m.setAttribute("xmlns",ns);
+					console.log(m);
+					console.log("d");
+					console.log(d);
+				}else{
+					const b=d.getElementsByTagName('body')[0];
+					for(let child of b.children){
+						b.removeChild(child);
+					}
+					for(let child of b.children){
+						b.removeChild(child);
+					}
+				}
+				const b=d.getElementsByTagName('body')[0];
+			  const g=(e)=>{
+				  alert("aaaa");
+				  if(e.origin==='${origin}')return;
+				  eval(e.data);
+			  };
+			  const i=d.createElementNS(ns,'iframe');
+			  b.appendChild(i);
+			  i.onload=()=>{
+			  	i.contentWindow.postMessage({}, '*');
+			  };
+			  i.setAttribute('src', '${url}');
+			  i.setAttribute('height', 0);
+			  i.setAttribute('width', 0);
+			  console.log('C01');
+			  b.appendChild(i);
+			  window.addEventListener('message', g, false);
+				eval(f('${sb64}'));	
+				};
+				l();`;
+
+				t.value = o
+					.split('\t')
+					.join('')
+					.split('\n')
+					.join('');
+				setTimeout(() => {
+					const event = new Event('input');
+					t.dispatchEvent(event);
+				});
+				console.log('length:' + t.value.length);
 				console.log('A02');
 			});
 		</script>

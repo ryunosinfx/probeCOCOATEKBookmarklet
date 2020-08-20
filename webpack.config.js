@@ -1,12 +1,14 @@
 const path = require('path');
 const webpack = require('webpack');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
 	//  context: __dirname,
 	entry: {
-		bundle: './src/main.js',
+		bookmarklet: './src/index.js',
+		// bundle: './src/main.js',
 		test: ['./test/main.test.js'],
 	},
 	output: {
@@ -23,7 +25,7 @@ module.exports = {
 			// {
 			// 	test: /\.css$/,
 			// 	loader: 'style-loader!css-loader?importLoaders=1&camelCase',
-			// },
+			// },application/xml xmlns html
 			{
 				test: /\.vue$/,
 				loader: 'vue-loader',
@@ -74,7 +76,7 @@ module.exports = {
 		publicPath: '/',
 		contentBase: __dirname + '/',
 		watchContentBase: true,
-		port: 8088,
+		port: 8089,
 	},
 	plugins: [
 		new webpack.LoaderOptionsPlugin({
@@ -97,5 +99,23 @@ module.exports = {
 		alias: {
 			vue$: 'vue/dist/vue.esm.js',
 		},
+	},
+	optimization: {
+		minimize: true,
+		minimizer: [
+			new TerserPlugin({
+				terserOptions: {
+					ecma: 2016,
+					compress: {
+						booleans_as_integers: true,
+						ecma: 2017,
+					},
+					output: {
+						comments: false,
+						beautify: false,
+					},
+				},
+			}),
+		],
 	},
 };
