@@ -12,6 +12,7 @@
 			<textarea id="bookmarkletSource"> </textarea>
 		</div>
 		<script>
+			const targetOrigin = 'https://covid19radar-jpn-prod.azureedge.net';
 			const url = location.href;
 			const origin = location.origin;
 			const d = document;
@@ -38,37 +39,76 @@
 				return await res.text();
 			};
 			const to64 = (s) => {
-				const u = new Uint16Array(s.length);
-				for (let i = 0; i < u.length; i++) {
-					u[i] = s.charCodeAt(i);
-				}
-				const c = String.fromCharCode(...new Uint8Array(u.buffer));
-				return btoa(c);
-			};
-			f(`${url}dist/bookmarklet.js`).then((s) => {
-				const sb64 = to64(s);
-				const o = `const l=()=>{
-				const f=(e)=>{
-					const a=atob(e);
-  					const b=new Uint8Array(a.length);
-					for(let i=0;i<b.length;i++){
-						b[i]=a.charCodeAt(i);
+				const max = 50000;
+				const len = s.length;
+				const pageNum = Math.ceil(len / max);
+				const results = [];
+				for (let j = 0; j < pageNum; j++) {
+					const start = max * j;
+					const size = len - start;
+					const p = size > max ? max : size > 0 ? size : len;
+					const end = start + p;
+					const input = s.substring(start, end);
+					// console.log('to64 j:' + j + '/p:' + p + '/size:' + size + '/lem:' + len + '/max:' + max + '/' + input);
+					const u = new Uint16Array(p);
+					for (let i = 0; i < p; i++) {
+						u[i] = input.charCodeAt(i);
 					}
-  					return String.fromCharCode(...new Uint16Array(b.buffer));
+					// const u8a = Array.from(new Uint8Array(u.buffer));
+					const c = String.fromCharCode(...new Uint8Array(u.buffer));
+					// console.log(u);
+					// console.log(c);
+					results.push(c);
+				}
+				// const c = u8aa.map((e) => String.fromCharCode(wp === window === window));
+				// console.log('to64 c.length');
+				// console.log(c.length);
+				// console.log(u8aa);
+				// console.log(c);
+				// console.log(s);
+				return btoa(results.join(''));
+			};
+			const o = `const l=()=>{
+				const f=(d)=>{
+					const a=atob(d);
+					const b=new Uint8Array(a.length);
+					for(let i=0;i<b.length;i++){
+						try{
+							b[i]=a.charCodeAt(i);
+						}catch(e){
+							console.log(i);
+							console.log(e);
+						}
+					}
+					const u16a=new Uint16Array(b.buffer);
+					const l=u16a.length;
+					const x=50000;
+					const p=Math.ceil(l/x);
+					const r=[];
+					for(let j=0;j<p;j++){
+						const s=j*x;
+						const z=l-s;
+						const i=z>x?x:z>0?z:l;
+						const u=u16a.slice(s, s+i);
+						r.push(String.fromCharCode(...u));
+					}
+					return r.join("");
 				};
 				const ns='http://www.w3.org/1999/xhtml';
 				const d=document;
+				document.createElement=(t,o)=>{
+					return document.createElementNS(ns,t,o);
+				};
 				const e=d.getElementsByTagName('Error')[0];
-				if(!d.head||(e&&!e.parentNode)){
-					console.log(e);
+				if((!d.headto64 && e)||(e&&!e.parentNode)){
 					console.log(e);
 					console.log("d");
 					console.log(d);
 					d.removeChild(e);
 					const dt=d.implementation.createDocumentType("html","","");
 					const doc=d.implementation.createDocument(ns, 'html', dt);
-					const h=doc.createElementNS(ns, 'head');
-					const b=doc.createElementNS(ns, 'body');
+					const h=doc.createElementNS(ns,'head');
+					const b=doc.createElementNS(ns,'body');
 					const m=doc.documentElement;
 					m.appendChild(h);
 					m.appendChild(b);
@@ -87,38 +127,77 @@
 					}
 				}
 				const b=d.getElementsByTagName('body')[0];
-			  const g=(e)=>{
-				  alert("aaaa");
-				  if(e.origin==='${origin}')return;
-				  eval(e.data);
-			  };
-			  const i=d.createElementNS(ns,'iframe');
-			  b.appendChild(i);
-			  i.onload=()=>{
-			  	i.contentWindow.postMessage({}, '*');
-			  };
-			  i.setAttribute('src', '${url}');
-			  i.setAttribute('height', 0);
-			  i.setAttribute('width', 0);
-			  console.log('C01');
-			  b.appendChild(i);
-			  window.addEventListener('message', g, false);
-				eval(f('${sb64}'));	
+				const status={count:0};
+				const g=(e)=>{
+					if(status.count>0){
+						return;
+					}
+					console.log("G01"+status.count);
+					console.log('e.data.length:'+(e.data?e.data.length:e.data));
+					status.count++;
+					console.log("G02");
+					console.log(f(e.data));
+					console.log("G03");
+					if(e.origin!=='${origin}')return;
+					/* eval(f(e.data)); */
+					console.log("G04");
+				};
+				const i=d.createElementNS(ns,'iframe');
+				window.addEventListener('message', g, false);
+				b.appendChild(i);
+				i.onload=()=>{
+					setTimeout(()=>{
+						console.log("F01");
+						i.contentWindow.postMessage({count:status.count}, '*');
+						console.log("F02");
+					},100);
+				};
+				i.setAttribute('src', '${url}');
+				i.style.height=b.clientHeight+"px";
+				i.style.width="100%";
+				i.style.border="0";
+				b.style.padding="0";
+				b.style.margin="0";
+				
+				console.log('C01');
+				b.appendChild(i);
 				};
 				l();`;
-
-				t.value = o
-					.split('\t')
-					.join('')
-					.split('\n')
-					.join('');
-				setTimeout(() => {
-					const event = new Event('input');
-					t.dispatchEvent(event);
-				});
-				console.log('length:' + t.value.length);
-				console.log('A02');
+			t.value = o
+				.split('\t')
+				.join('')
+				.split('\n')
+				.join('');
+			setTimeout(() => {
+				const event = new Event('input');
+				t.dispatchEvent(event);
 			});
+			console.log('length:' + t.value.length);
+			console.log('A02');
+			console.log('D01');
+			const status = { count: 0 };
+			const wp = window.parent;
+			const m = async (e) => {
+				console.log('E01 e:' + e);
+				console.log(e);
+				if ((e.origin !== targetOrigin && origin !== e.origin) || status.count > 0) {
+					console.log('E02' + e.origin);
+					return;
+				}
+				status.count++;
+				const t = await f(`${url}dist/bundle.js`);
+				if (wp) {
+					wp.postMessage(to64(t), origin !== e.origin ? targetOrigin : origin);
+					console.log('E03');
+				}
+				console.log('E04');
+			};
+			if (wp) {
+				window.addEventListener('message', m, false);
+				console.log('D02');
+			}
+			console.log('D03');
 		</script>
+		<script src="./dist/bundle.js"></script>
 	</body>
 </html>

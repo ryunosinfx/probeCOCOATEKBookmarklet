@@ -8,7 +8,7 @@ module.exports = {
 	//  context: __dirname,
 	entry: {
 		bookmarklet: './src/index.js',
-		// bundle: './src/main.js',
+		bundle: './src/main.js',
 		test: ['./test/main.test.js'],
 	},
 	output: {
