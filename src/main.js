@@ -1,14 +1,15 @@
 import Vue from 'vue';
 import vuetify from './plugins/vuetify';
-
+import { BookmarkletBasePage } from './BookmarkletBasePage';
 import App from './Main';
 
-(() => {
+(async () => {
 	const wp = window.parent;
 	console.log('wp');
 	console.log(wp);
-	alert(wp === window);
+	// alert(wp === window);
 	if (!wp || wp === window) {
+		await BookmarkletBasePage.main();
 		return;
 	}
 	const targetId = 'app' + Date.now();

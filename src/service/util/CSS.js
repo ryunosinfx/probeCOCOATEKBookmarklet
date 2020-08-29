@@ -3,7 +3,7 @@ import { V } from './V';
 const htmlns = 'http://www.w3.org/1999/xhtml';
 export class CSS {
 	constructor() {
-		this.v = new V();
+		this.v = V.gi();
 		// const s = this.v.d.createElement('style');
 		// s.setAttribute('xmlns', 'http://www.w3.org/1999/xhtml');
 		// s.setAttribute('type', 'text/css');
