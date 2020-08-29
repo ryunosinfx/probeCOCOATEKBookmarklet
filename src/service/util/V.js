@@ -24,14 +24,14 @@ export class V {
 	}
 	init() {
 		if (!this.b) {
-			const dt = d.implementation.createDocumentType('html', '', '');
-			const doc = d.implementation.createDocument(ns, 'html', dt);
+			const dt = this.d.implementation.createDocumentType('html', '', '');
+			const doc = this.d.implementation.createDocument(ns, 'html', dt);
 			const h = doc.createElementNS(ns, 'head');
 			const b = doc.createElementNS(ns, 'body');
 			const m = doc.documentElement;
 			this.a(m, h);
 			this.a(m, b);
-			d.appendChild(m, true);
+			this.d.appendChild(m, true);
 			m.setAttribute('xmlns', ns);
 			this.b = this.tn('body');
 			this.h = this.tn('head');
