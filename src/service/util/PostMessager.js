@@ -26,15 +26,15 @@ export class PostMessager {
 		f.i = i;
 	}
 	static setOnLoad(callback) {
-		funcs.oL = callback;
+		f.oL = callback;
 	}
 	static setOnMessageAtChild(callback) {
 		if (PostMessager.isChildFrame()) {
-			funcs.oM = callback;
+			f.oM = callback;
 		}
 	}
 	static setOnMessage(callback) {
-		funcs.oM = callback;
+		f.oM = callback;
 	}
 	static postToChild(msg) {
 		f.i && window.parent === window ? f.i.contentWindow.postMessage(msg, '*') : null;

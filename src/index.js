@@ -19,6 +19,5 @@ const main = () => {
 	};
 	PostMessager.setOnMessage(f);
 	PostMessager.setOnLoad(m);
-	v.b.appendChild(i);
 };
 main();
