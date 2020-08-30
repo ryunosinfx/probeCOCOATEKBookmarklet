@@ -80,10 +80,14 @@ export class PostMessager {
 	}
 	static postToParent(msg) {
 		return new Promise((r) => {
+			console.log('PostMessager postToParent START msg:' + msg);
 			const h = Hasher.sha256(Date.now + '#' + Math.random(Date.now), 2);
+			console.log('PostMessager postToParent hash:' + h);
 			q[h] = r;
 			window.parent !== window ? window.parent.postMessage(msg, '*') : null;
+			console.log('PostMessager postToParent POST!');
 			setTimeout(() => {
+				console.log('PostMessager postToParent TIMEOUT!');
 				r(null);
 				delete q[h];
 			}, 60000);
