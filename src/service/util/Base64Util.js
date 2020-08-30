@@ -44,4 +44,52 @@ export class Base64Util {
 		}
 		return btoa(results.join(''));
 	}
+	static u8a2bs(u8a) {
+		const r = [];
+		for (let e of u8a) {
+			r.push(String.fromCharCode(e));
+		}
+		return r.join('');
+	}
+
+	static ab2bs(ab) {
+		return Base64Util.u8a2bs(new Uint8Array(ab));
+	}
+	static aToB64(ai) {
+		const ab = ai.buffer ? ai.buffer : ai;
+		return btoa(Base64Util.ab2bs(ab));
+	}
+	static aToB64u(ai) {
+		const b = Base64Util.aToB64(ai);
+		return Base64Util.toB64u(b);
+	}
+
+	static dataURI2bs(dURI) {
+		return atob(dURI.split(',')[1]);
+	}
+	static toB64u(b) {
+		return b
+			? b
+					.split('+')
+					.join('-')
+					.split('/')
+					.join('_')
+					.split('=')
+					.join('')
+			: b;
+	}
+	static toB64(bu) {
+		const l = bu.length;
+		const c = l % 4 > 0 ? 4 - (l % 4) : 0;
+		let b = bu
+			.split('-')
+			.join('+')
+			.split('_')
+			.join('/');
+
+		for (let i = 0; i < c; i++) {
+			b += '=';
+		}
+		return b;
+	}
 }

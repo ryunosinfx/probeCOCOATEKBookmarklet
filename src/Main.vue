@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import { MainLogic } from './service/main/MainLogic';
 export default {
 	components: {},
 	data() {
@@ -13,7 +14,12 @@ export default {
 			greeting: 'Hello',
 		};
 	},
-	created() {},
+	created() {
+		this.main = new MainLogic();
+	},
+	mounted() {
+		this.main.getList();
+	},
 	methods: {},
 };
 </script>

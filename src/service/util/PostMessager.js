@@ -1,13 +1,52 @@
 import { V } from './V';
+import { Hasher } from './Hasher';
 const v = V.gi();
-const f = { oM: () => {}, oL: () => {}, i: null };
+const f = { oM: async () => {}, oL: () => {}, i: null };
 const M = 'message';
+const q = {};
 export class PostMessager {
+	static init() {
+		v.w.addEventListener(
+			M,
+			async (e) => {
+				const d = e.data;
+				if (d && typeof d === 'string' && d.indexOf('{') === 0) {
+					try {
+						const o = JSON.parent(d);
+						if (o.hash) {
+							const j = q[o.hash];
+							if (j) {
+								j(o);
+								delete q[o.hash];
+							} else {
+								f.oM(e);
+							}
+						}
+					} catch (e) {
+						console.log(e);
+					}
+				}
+			},
+			false
+		);
+	}
 	static buildChild(url, isFullScreen) {
 		v.w.addEventListener(
 			M,
-			(e) => {
-				f.oM(e);
+			async (e) => {
+				const d = e.data;
+				if (d && typeof d === 'string' && d.indexOf('{') === 0) {
+					try {
+						const o = JSON.parent(d);
+						const r = await f.oM(e);
+						if (o.hash) {
+							const rd = { msg: r, hash: o.hash };
+							PostMessager.postToChild(JSON.stringify(rd));
+						}
+					} catch (e) {
+						console.log(e);
+					}
+				}
 			},
 			false
 		);
@@ -38,6 +77,17 @@ export class PostMessager {
 	}
 	static postToChild(msg) {
 		f.i && window.parent === window ? f.i.contentWindow.postMessage(msg, '*') : null;
+	}
+	static postToParent(msg) {
+		return new Promise((r) => {
+			const h = Hasher.sha256(Date.now + '#' + Math.random(Date.now), 2);
+			q[h] = r;
+			window.parent !== window ? window.parent.postMessage(msg, '*') : null;
+			setTimeout(() => {
+				r(null);
+				delete q[h];
+			}, 60000);
+		});
 	}
 	static isChildFrame() {
 		return window.parent !== window;
