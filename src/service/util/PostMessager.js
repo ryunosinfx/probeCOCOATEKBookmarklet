@@ -79,19 +79,21 @@ export class PostMessager {
 		f.i && window.parent === window ? f.i.contentWindow.postMessage(msg, '*') : null;
 	}
 	static postToParent(msg) {
-		return new Promise((r) => {
-			console.log('PostMessager postToParent START msg:' + msg);
-			const h = Hasher.sha256(Date.now + '#' + Math.random(Date.now), 2);
+		const f = async (r) => {
+			console.log('PostMessager postToParent START msg:' + msg + ' /' + typeof msg);
+			const h = await Hasher.sha256(Date.now + '#' + Math.random(Date.now), 2);
 			console.log('PostMessager postToParent hash:' + h);
 			q[h] = r;
-			window.parent !== window ? window.parent.postMessage(msg, '*') : null;
+			msg.hash = h;
+			window.parent !== window ? window.parent.postMessage(JSON.stringify(msg), '*') : null;
 			console.log('PostMessager postToParent POST!');
 			setTimeout(() => {
 				console.log('PostMessager postToParent TIMEOUT!');
 				r(null);
 				delete q[h];
 			}, 60000);
-		});
+		};
+		return new Promise(f);
 	}
 	static isChildFrame() {
 		return window.parent !== window;
