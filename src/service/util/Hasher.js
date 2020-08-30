@@ -17,7 +17,7 @@ export class Hasher {
 	static async d(m, a = 'SHA-256', sc = 1) {
 		let r = te.encode(m);
 		for (let i = 0; i < sc; i++) {
-			r = await window.crypto.subtle.d(a, r);
+			r = await window.crypto.subtle.digest(a, r);
 		}
 		return Base64Util.aToB64u(r);
 	}
