@@ -6,6 +6,7 @@ const M = 'message';
 const q = {};
 export class PostMessager {
 	static init() {
+		console.log('PostMessager.init');
 		v.w.addEventListener(
 			M,
 			async (e) => {
