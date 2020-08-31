@@ -43,11 +43,12 @@ export class PostMessager {
 				if (d && typeof d === 'string' && d.indexOf('{') === 0) {
 					try {
 						const o = JSON.parse(d);
-						console.log('f.oN a o.hash:' + o.hash);
+						const h = o.hash;
+						console.log('f.oN a o.hash:' + h);
 						const r = await f.oM({ data: o });
-						console.log('f.oN b');
-						if (o.hash) {
-							const rd = { msg: r, hash: o.hash };
+						console.log('f.oN b h:' + h);
+						if (h) {
+							const rd = { msg: r, hash: h };
 							PostMessager.postToChild(JSON.stringify(rd));
 						}
 					} catch (e) {
@@ -85,7 +86,7 @@ export class PostMessager {
 	static postToChild(msg) {
 		console.log('postToChild a');
 		if (f.i && window.parent === window) {
-			console.log('postToChild b');
+			console.log('postToChild b msg:' + msg);
 			f.i.contentWindow.postMessage(msg, '*');
 		}
 	}
