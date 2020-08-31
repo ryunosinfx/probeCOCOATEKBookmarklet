@@ -68,9 +68,12 @@ export class V {
 			return es;
 		}
 		for (let e of es) {
-			const p = e.parent ? e.parent : this.d;
-			p.removeChild(e);
+			this.re(e);
 		}
+	}
+	re(e) {
+		const p = e.parent ? e.parent : this.d;
+		p.removeChild(e);
 	}
 	tn(tag) {
 		return this.d.getElementsByTagName(tag)[0];
@@ -80,6 +83,9 @@ export class V {
 	}
 	hr(text, className) {
 		return this.ct('hr', text, className);
+	}
+	pre(text, className) {
+		return this.ct('pre', text, className);
 	}
 	div(className) {
 		return this.ct('div', '', className);

@@ -11,20 +11,20 @@ export class PostMessager {
 			M,
 			async (e) => {
 				const d = e.data;
-				console.log('f.oMc a d:' + d);
+				// console.log('f.oMc a d:' + d);
 				if (d && typeof d === 'string' && d.indexOf('{') === 0) {
 					try {
 						const o = JSON.parse(d);
-						console.log('f.oMc b o.hash:' + o.hash);
+						// console.log('f.oMc b o.hash:' + o.hash);
 						if (o.hash) {
 							const j = q[o.hash];
-							console.log('f.oMc c j:' + j);
+							// console.log('f.oMc c j:' + j);
 							if (j) {
-								console.log('f.oMc d j:' + j);
+								// console.log('f.oMc d j:' + j);
 								j(o);
 								delete q[o.hash];
 							} else {
-								console.log('f.oMc e j:' + j);
+								// console.log('f.oMc e j:' + j);
 								f.oM(e);
 							}
 						}
@@ -85,9 +85,9 @@ export class PostMessager {
 		f.oM = callback;
 	}
 	static postToChild(msg) {
-		console.log('postToChild a');
+		// console.log('postToChild a');
 		if (f.i && window.parent === window) {
-			console.log('postToChild b msg:' + msg);
+			// console.log('postToChild b msg:' + msg);
 			f.i.contentWindow.postMessage(msg, '*');
 		}
 	}
