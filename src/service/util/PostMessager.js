@@ -12,7 +12,7 @@ export class PostMessager {
 				const d = e.data;
 				if (d && typeof d === 'string' && d.indexOf('{') === 0) {
 					try {
-						const o = JSON.parent(d);
+						const o = JSON.parse(d);
 						if (o.hash) {
 							const j = q[o.hash];
 							if (j) {
@@ -37,8 +37,8 @@ export class PostMessager {
 				const d = e.data;
 				if (d && typeof d === 'string' && d.indexOf('{') === 0) {
 					try {
-						const o = JSON.parent(d);
-						const r = await f.oM(e);
+						const o = JSON.parse(d);
+						const r = await f.oM({ data: o });
 						if (o.hash) {
 							const rd = { msg: r, hash: o.hash };
 							PostMessager.postToChild(JSON.stringify(rd));

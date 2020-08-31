@@ -14,8 +14,12 @@ const main = () => {
 		PostMessager.postToChild('OK');
 	};
 	const f = async (e) => {
-		const data = await FileLoadService.getFile(e.data.path);
-		PostMessager.postToChild(data);
+		console.log('main e:' + e + ' /' + typeof e);
+		console.log(e);
+		const d = await FileLoadService.getFile(e.data.path, true);
+		console.log('main data:' + d + ' /' + typeof d);
+		console.log(d);
+		PostMessager.postToChild(d);
 	};
 	PostMessager.setOnMessage(f);
 	PostMessager.setOnLoad(m);

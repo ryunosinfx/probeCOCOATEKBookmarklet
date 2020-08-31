@@ -1,9 +1,9 @@
 import { F } from './util/Fetcher';
 export class FileLoadService {
 	constructor() {}
-	static getFile(path) {
+	static getFile(path, isText) {
 		const f = async (resolve) => {
-			const brob = await F.l(path);
+			const brob = await F.l(path, undefined, isText);
 			const reader = new FileReader();
 			reader.addEventListener(
 				'load',
@@ -13,7 +13,9 @@ export class FileLoadService {
 				false
 			);
 
-			if (brob) {
+			if (isText && brob) {
+				resolve(brob);
+			} else if (!isText && brob) {
 				reader.readAsDataURL(brob);
 			} else {
 				resolve(null);
