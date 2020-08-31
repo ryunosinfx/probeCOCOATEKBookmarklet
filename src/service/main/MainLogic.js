@@ -1,7 +1,9 @@
 import { PostMessager } from '../util/PostMessager';
 import { fileListjson } from '../constants/Constants';
 export class MainLogic {
-	constructor() {}
+	constructor() {
+		PostMessager.init();
+	}
 	async getList() {
 		console.log('MainLogic getList START');
 		const result = await PostMessager.postToParent({ path: fileListjson });
