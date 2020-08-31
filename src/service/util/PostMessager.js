@@ -10,15 +10,20 @@ export class PostMessager {
 			M,
 			async (e) => {
 				const d = e.data;
+				console.log('f.oMc a d:' + d);
 				if (d && typeof d === 'string' && d.indexOf('{') === 0) {
 					try {
 						const o = JSON.parse(d);
+						console.log('f.oMc b o.hash:' + o.hash);
 						if (o.hash) {
 							const j = q[o.hash];
+							console.log('f.oMc c j:' + j);
 							if (j) {
+								console.log('f.oMc d j:' + j);
 								j(o);
 								delete q[o.hash];
 							} else {
+								console.log('f.oMc e j:' + j);
 								f.oM(e);
 							}
 						}
@@ -38,7 +43,9 @@ export class PostMessager {
 				if (d && typeof d === 'string' && d.indexOf('{') === 0) {
 					try {
 						const o = JSON.parse(d);
+						console.log('f.oN a o.hash:' + o.hash);
 						const r = await f.oM({ data: o });
+						console.log('f.oN b');
 						if (o.hash) {
 							const rd = { msg: r, hash: o.hash };
 							PostMessager.postToChild(JSON.stringify(rd));
@@ -76,7 +83,11 @@ export class PostMessager {
 		f.oM = callback;
 	}
 	static postToChild(msg) {
-		f.i && window.parent === window ? f.i.contentWindow.postMessage(msg, '*') : null;
+		console.log('postToChild a');
+		if (f.i && window.parent === window) {
+			console.log('postToChild b');
+			f.i.contentWindow.postMessage(msg, '*');
+		}
 	}
 	static postToParent(msg) {
 		const f = async (r) => {
