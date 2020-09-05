@@ -1,10 +1,10 @@
 <template>
-	<div id="main">
+	<div id="main" class="v-application">
 		<h1>covid19radar zip.file link</h1>
 		<p>click and download!</p>
 		<ul>
 			<li v-for="item in loadedData.list" :key="item.url">
-				created:{{ new Date(item.created).toISOString() }} <span class="zipdllink" v-on:click="dl(item.url)">{{ item.url }} DL</span>
+				created:{{ new Date(item.created).toISOString() }} <button class="zipdllink" v-on:click="dl(item.url)">{{ item.url }} DL</button>
 			</li>
 		</ul>
 	</div>
