@@ -4,7 +4,7 @@
 		<p>click and download!</p>
 		<ul>
 			<li v-for="item in loadedData.list" :key="item.url">
-				<span v-on:click="dl">{{ item.url }} DL</span>
+				created:{{ item.created }} <span class="btn" v-on:click="dl(url)">{{ item.url }} DL</span>
 			</li>
 		</ul>
 	</div>
@@ -30,7 +30,10 @@ export default {
 	},
 	methods: {
 		dl(url) {
-			this.main.dl(url);
+			return () => {
+				alert(url);
+				this.main.dl(url);
+			};
 		},
 	},
 };
@@ -40,5 +43,8 @@ export default {
 p {
 	font-size: 2em;
 	text-align: center;
+}
+span.btn {
+	cursor: pointer;
 }
 </style>
