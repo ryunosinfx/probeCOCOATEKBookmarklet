@@ -26,6 +26,7 @@ export default {
 	async mounted() {
 		const list = await this.main.getList();
 		console.log('mounted list:' + typeof list);
+		loadedData.list = list;
 	},
 	methods: {
 		dl(url) {
