@@ -1,7 +1,7 @@
 <template>
 	<div id="main" class="v-application">
 		<h1>covid19radar zip.file link</h1>
-		<p>click and download!</p>
+		<p v-on:click="test">click and download!</p>
 		<ul>
 			<li v-for="item in loadedData.list" :key="item.url">
 				created:{{ new Date(item.created).toISOString() }} <button class="zipdllink" v-on:click="dl(item.url)">{{ item.url }} DL</button>
@@ -36,6 +36,9 @@ export default {
 				alert(url);
 				this.main.dl(url);
 			};
+		},
+		test(e) {
+			alert('e:' + e);
 		},
 	},
 };
