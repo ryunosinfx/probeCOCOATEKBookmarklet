@@ -1,10 +1,10 @@
 <template>
 	<div>
-		<h1>タイトルー</h1>
-		<p>Hello, World!</p>
+		<h1>covid19radar zip.file link</h1>
+		<p>click and download!</p>
 		<ul>
 			<li v-for="item in loadedData.list" :key="item.url">
-				<span v-on:click="dl">{{ item.url }}</span>
+				<span v-on:click="dl">{{ item.url }} DL</span>
 			</li>
 		</ul>
 	</div>
@@ -26,11 +26,11 @@ export default {
 	async mounted() {
 		const list = await this.main.getList();
 		console.log('mounted list:' + typeof list);
-		loadedData.list = list;
+		this.loadedData.list = list;
 	},
 	methods: {
 		dl(url) {
-			this.main(url);
+			this.main.dl(url);
 		},
 	},
 };
