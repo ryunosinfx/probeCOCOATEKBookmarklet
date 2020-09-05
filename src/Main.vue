@@ -2,6 +2,11 @@
 	<div>
 		<h1>タイトルー</h1>
 		<p>Hello, World!</p>
+		<ul>
+			<li v-for="item in loadedData.list" :key="item.url">
+				<span v-on:click="dl">{{ item.url }}</span>
+			</li>
+		</ul>
 	</div>
 </template>
 
@@ -12,15 +17,21 @@ export default {
 	data() {
 		return {
 			greeting: 'Hello',
+			loadedData: { list: [] },
 		};
 	},
 	created() {
 		this.main = new MainLogic();
 	},
-	mounted() {
-		this.main.getList();
+	async mounted() {
+		const list = await this.main.getList();
+		console.log('mounted list:' + typeof list);
 	},
-	methods: {},
+	methods: {
+		dl(url) {
+			this.main(url);
+		},
+	},
 };
 </script>
 
