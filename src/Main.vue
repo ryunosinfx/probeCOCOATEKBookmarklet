@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div id="main">
 		<h1>covid19radar zip.file link</h1>
 		<p>click and download!</p>
 		<ul>
@@ -13,6 +13,8 @@
 <script>
 import { MainLogic } from './service/main/MainLogic';
 export default {
+	el: '#main',
+	name: 'main',
 	components: {},
 	data() {
 		return {
