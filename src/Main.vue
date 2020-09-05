@@ -32,6 +32,7 @@ export default {
 	},
 	methods: {
 		dl(url) {
+			console.log('url:' + url);
 			return () => {
 				alert(url);
 				this.main.dl(url);
