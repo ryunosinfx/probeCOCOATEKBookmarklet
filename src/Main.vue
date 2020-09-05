@@ -4,7 +4,7 @@
 		<p>click and download!</p>
 		<ul>
 			<li v-for="item in loadedData.list" :key="item.url">
-				created:{{ item.created }} <span class="btn" v-on:click="dl(url)">{{ item.url }} DL</span>
+				created:{{ new Date(item.created).toISOString() }} <span class="zipdllink" v-on:click="dl(item.url)">{{ item.url }} DL</span>
 			</li>
 		</ul>
 	</div>
@@ -44,7 +44,9 @@ p {
 	font-size: 2em;
 	text-align: center;
 }
-span.btn {
+.zipdllink {
 	cursor: pointer;
+	color: blue;
+	text-decoration: underline;
 }
 </style>
