@@ -4,11 +4,14 @@ export class FileLoadService {
 	static getFile(path, isText) {
 		const f = async (resolve) => {
 			const brob = await F.l(path, undefined, isText);
-			const reader = new FileReader();
-			reader.addEventListener(
+			const fr = new FileReader();
+			fr.addEventListener(
 				'load',
 				() => {
-					resolve(reader.result);
+					console.log('FileLoadService a');
+					const b64d = fr.result;
+					resolve(b64d);
+					console.log(b64d);
 				},
 				false
 			);
@@ -16,7 +19,7 @@ export class FileLoadService {
 			if (isText && brob) {
 				resolve(brob);
 			} else if (!isText && brob) {
-				reader.readAsDataURL(brob);
+				fr.readAsDataURL(brob);
 			} else {
 				resolve(null);
 			}

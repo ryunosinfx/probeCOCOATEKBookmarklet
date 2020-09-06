@@ -21,7 +21,7 @@ export class PostMessager {
 							// console.log('f.oMc c j:' + j);
 							if (j) {
 								// console.log('f.oMc d j:' + j);
-								j(o);
+								j(o.msg);
 								delete q[o.hash];
 							} else {
 								// console.log('f.oMc e j:' + j);
