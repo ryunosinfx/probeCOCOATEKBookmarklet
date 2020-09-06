@@ -88,6 +88,8 @@ export class PostMessager {
 		// console.log('postToChild a');
 		if (f.i && window.parent === window) {
 			// console.log('postToChild b msg:' + msg);
+			console.log('PostMessager postToChild f.i');
+			console.log(f.i);
 			f.i.contentWindow.postMessage(msg, '*');
 		}
 	}
