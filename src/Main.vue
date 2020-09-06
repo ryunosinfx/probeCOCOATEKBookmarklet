@@ -33,11 +33,8 @@ export default {
 	methods: {
 		dl(url) {
 			console.log('CCCCCCCCCCCCCCCCCCCCCCCurl:' + url);
-			return () => {
-				console.log('############################mounted list:');
-				alert(url);
-				this.main.dl(url);
-			};
+			alert(url);
+			this.main.dl(url);
 		},
 		test(e) {
 			alert('e:' + e);
