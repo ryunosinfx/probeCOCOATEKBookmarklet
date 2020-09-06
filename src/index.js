@@ -16,7 +16,8 @@ const main = () => {
 	const f = async (e) => {
 		console.log('main e:' + e + ' /' + typeof e);
 		console.log(e);
-		const d = await FileLoadService.getFile(e.data.path, true);
+		const isText = e.data.isText;
+		const d = await FileLoadService.getFile(e.data.path, isText);
 		console.log('main data:' + d + ' /' + typeof d);
 		console.log(d);
 		// PostMessager.postToChild(d);

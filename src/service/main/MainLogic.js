@@ -10,7 +10,7 @@ export class MainLogic {
 	}
 	async getList() {
 		console.log('MainLogic getList START');
-		const result = await PostMessager.postToParent({ path: fileListjson });
+		const result = await PostMessager.postToParent({ path: fileListjson, isText: true });
 		console.log(result);
 		const msg = result;
 		const obj = {};
