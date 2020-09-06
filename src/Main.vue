@@ -33,7 +33,6 @@ export default {
 	methods: {
 		dl(url) {
 			console.log('CCCCCCCCCCCCCCCCCCCCCCCurl:' + url);
-			alert(url);
 			this.main.dl(url);
 		},
 		test(e) {

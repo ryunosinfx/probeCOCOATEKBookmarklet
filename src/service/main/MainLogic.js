@@ -34,6 +34,7 @@ export class MainLogic {
 		const fns = path.split('/');
 		const fn = fns[fns.length - 1];
 		const blob = this.strage[path];
+		console.log('MainLogic getList blob:' + blob);
 		if (blob) {
 			FileDLHelper.dl(fn, blob);
 		}
