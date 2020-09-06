@@ -5,6 +5,7 @@ export class FileDLHelper {
 		const dlLink = v.c('a');
 		dlLink.download = fileName;
 		dlLink.href = URL.createObjectURL(blob, { type: contentType });
+		v.a(v.b, dlLink);
 		// dlLink.dataset.downloadurl = [contentType, fileName, dlLink.href].join(':');
 		dlLink.click();
 		setTimeout(() => {
