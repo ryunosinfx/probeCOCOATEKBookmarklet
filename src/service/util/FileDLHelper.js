@@ -5,6 +5,8 @@ export class FileDLHelper {
 		console.log('FileDLHelper dl fileName:' + fileName);
 		const dlLink = v.c('a');
 		console.log('FileDLHelper dl dlLink:' + dlLink);
+		console.log(dlLink);
+		console.log(blob);
 		dlLink.download = fileName;
 		console.log('FileDLHelper dl dlLink.download:' + dlLink.download);
 		dlLink.href = URL.createObjectURL(blob, { type: contentType });
