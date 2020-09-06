@@ -101,9 +101,11 @@ export class PostMessager {
 			window.parent !== window ? window.parent.postMessage(JSON.stringify(msg), '*') : null;
 			console.log('PostMessager postToParent POST!');
 			setTimeout(() => {
-				console.log('PostMessager postToParent TIMEOUT!');
-				r(null);
-				delete q[h];
+				if (q[h]) {
+					console.log('PostMessager postToParent TIMEOUT!');
+					r(null);
+					delete q[h];
+				}
 			}, 60000);
 		};
 		return new Promise(f);

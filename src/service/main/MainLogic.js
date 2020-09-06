@@ -36,6 +36,7 @@ export class MainLogic {
 		const blob = this.strage[path];
 		console.log('MainLogic getList blob:' + blob);
 		if (blob) {
+			console.log('MainLogic getList fn:' + fn);
 			FileDLHelper.dl(fn, blob);
 		}
 	}
