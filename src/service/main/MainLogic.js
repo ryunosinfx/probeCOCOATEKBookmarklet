@@ -12,7 +12,7 @@ export class MainLogic {
 		console.log('MainLogic getList START');
 		const result = await PostMessager.postToParent({ path: fileListjson });
 		console.log(result);
-		const msg = result.msg;
+		const msg = result;
 		const obj = {};
 		try {
 			obj.list = JSON.parse(msg);
