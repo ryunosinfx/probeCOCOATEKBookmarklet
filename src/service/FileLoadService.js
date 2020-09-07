@@ -17,10 +17,13 @@ export class FileLoadService {
 			);
 
 			if (isText && brob) {
+				console.log('FileLoadService b isText:' + isText);
 				resolve(brob);
 			} else if (!isText && brob) {
+				console.log('FileLoadService c isText:' + isText);
 				fr.readAsDataURL(brob);
 			} else {
+				console.log('FileLoadService null');
 				resolve(null);
 			}
 		};
