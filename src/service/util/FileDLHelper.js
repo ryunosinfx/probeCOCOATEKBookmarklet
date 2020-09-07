@@ -3,7 +3,7 @@ const v = V.gi();
 export class FileDLHelper {
 	static dl(fileName, blob, contentType = 'application/octetstream', isDataScheme) {
 		console.log('FileDLHelper dl fileName:' + fileName);
-		const dlLink = v.gi('dlLinkAncker'); //v.c('a');
+		const dlLink = v.gid('dlLinkAncker'); //v.c('a');
 		console.log('FileDLHelper dl dlLink:' + dlLink);
 		console.log(dlLink);
 		console.log(blob);
@@ -11,7 +11,7 @@ export class FileDLHelper {
 		console.log('FileDLHelper dl dlLink.download:' + dlLink.download);
 		dlLink.href = isDataScheme ? blob : URL.createObjectURL(blob, { type: contentType });
 		console.log('FileDLHelper dl dlLink.href:' + dlLink.href);
-		v.a(v.b, dlLink);
+		// v.a(v.b, dlLink);
 		console.log('FileDLHelper dl dlLink.parentNode:' + dlLink.parentNode);
 		// dlLink.dataset.downloadurl = [contentType, fileName, dlLink.href].join(':');
 		dlLink.click();

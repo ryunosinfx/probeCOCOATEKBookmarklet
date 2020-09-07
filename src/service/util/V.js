@@ -53,7 +53,7 @@ export class V {
 	b(elm, eventName, callback) {
 		elm.addEventListener(eventName, callback);
 	}
-	gi(id) {
+	gid(id) {
 		return this.d.getElementById(id);
 	}
 	ct(tag, text, className) {
