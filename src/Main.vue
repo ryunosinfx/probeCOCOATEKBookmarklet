@@ -7,6 +7,7 @@
 				created:{{ new Date(item.created).toISOString() }} <button class="zipdllink" v-on:click="dl(item.url)">{{ item.url }} DL</button>
 			</li>
 		</ul>
+		<a di="dlLinkAncker"></a>
 	</div>
 </template>
 

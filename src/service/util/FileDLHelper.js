@@ -3,7 +3,7 @@ const v = V.gi();
 export class FileDLHelper {
 	static dl(fileName, blob, contentType = 'application/octetstream', isDataScheme) {
 		console.log('FileDLHelper dl fileName:' + fileName);
-		const dlLink = v.c('a');
+		const dlLink = v.gi('dlLinkAncker'); //v.c('a');
 		console.log('FileDLHelper dl dlLink:' + dlLink);
 		console.log(dlLink);
 		console.log(blob);
