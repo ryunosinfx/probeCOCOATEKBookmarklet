@@ -37,7 +37,7 @@ export class MainLogic {
 		console.log('MainLogic getList blob:' + blob);
 		if (blob) {
 			console.log('MainLogic getList fn:' + fn);
-			FileDLHelper.dl(fn, blob);
+			FileDLHelper.dl(fn, blob, undefined, true);
 		}
 	}
 }
