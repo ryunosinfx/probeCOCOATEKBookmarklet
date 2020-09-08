@@ -1,6 +1,7 @@
 import { PostMessager } from '../util/PostMessager';
 import { V } from '../util/V';
 import { FileDLHelper } from '../util/FileDLHelper';
+import { ZipDecoder } from '../util/ZipDecoder';
 import { fileListjson } from '../constants/Constants';
 const v = V.gi();
 export class MainLogic {
@@ -36,6 +37,7 @@ export class MainLogic {
 		const blob = this.strage[path];
 		console.log('MainLogic getList blob:' + blob);
 		if (blob) {
+			ZipDecoder.decode(blob);
 			console.log('MainLogic getList fn:' + fn);
 			FileDLHelper.dl(fn, blob, undefined, true);
 		}
