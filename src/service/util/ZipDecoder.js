@@ -1,6 +1,8 @@
 import { Base64Util } from '../util/Base64Util';
 // const Zlib = require('../../../vendor/unzip.min');
-const Unzip = require('z../../../vendor/zlib.pretty.dev').Zlib.Unzip;
+const a = require('z../../../vendor/zlib.pretty.dev');
+const Unzip = globalThis.goog;
+console.log(Unzip);
 export class ZipDecoder {
 	static decode(dURI) {
 		const ab = Base64Util.dataURI2bs(dURI);
