@@ -1,6 +1,6 @@
 import { Base64Util } from '../util/Base64Util';
 // const Zlib = require('../../../vendor/unzip.min');
-const Unzip = require('z../../../vendor/unzip.min').Zlib.Unzip;
+const Unzip = require('z../../../vendor/zlib.pretty.dev').Zlib.Unzip;
 export class ZipDecoder {
 	static decode(dURI) {
 		const ab = Base64Util.dataURI2bs(dURI);
