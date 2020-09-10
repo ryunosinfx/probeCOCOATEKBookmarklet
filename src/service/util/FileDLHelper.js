@@ -19,7 +19,7 @@ export class FileDLHelper {
 		setTimeout(() => {
 			console.log('FileDLHelper dl remove!');
 			URL.revokeObjectURL(dlLink.href);
-			v.re(dlLink);
+			// v.re(dlLink);
 		}, 1000);
 	}
 }
