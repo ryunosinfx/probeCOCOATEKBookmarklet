@@ -1,15 +1,13 @@
 import { Base64Util } from '../util/Base64Util';
 // const Zlib = require('../../../vendor/unzip.min');
-const a = require('z../../../vendor/zlib.pretty.dev');
-const Unzip = globalThis.goog;
-console.log(Unzip);
+const Zlib = globalThis.Zlib;
 export class ZipDecoder {
 	static decode(dURI) {
 		const ab = Base64Util.dataURI2bs(dURI);
 		const retObj = {};
 		try {
 			const u8a = new Uint8Array(ab);
-			const unzip = new Unzip(u8a);
+			const unzip = new Zlib.Unzip(u8a);
 			const importFileList = unzip.getFilenames();
 
 			for (let filePath of importFileList) {
