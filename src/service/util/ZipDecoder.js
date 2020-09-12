@@ -3,13 +3,14 @@ import { Base64Util } from '../util/Base64Util';
 const Zlib = globalThis.Zlib;
 export class ZipDecoder {
 	static decode(dURI) {
-		const ab = Base64Util.dataURI2bs(dURI);
+		console.log('ZipDecoder decode -0-dURI:' + dURI);
+		const bs = Base64Util.dataURI2bs(dURI);
+		const u8a = Base64Util.bs2u8a(bs);
 		const retObj = {};
 		console.log('ZipDecoder decode -A-');
-		console.log(ab);
+		console.log(u8a);
 		try {
 			console.log('ZipDecoder decode -B-');
-			const u8a = new Uint8Array(ab);
 			const unzip = new Zlib.Unzip(u8a);
 			const importFileList = unzip.getFilenames();
 			console.log('ZipDecoder decode -C-');

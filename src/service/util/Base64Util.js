@@ -63,6 +63,14 @@ export class Base64Util {
 		const b = Base64Util.aToB64(ai);
 		return Base64Util.toB64u(b);
 	}
+	static bs2u8a(bs) {
+		const l = bs.length;
+		const a = new Uint8Array(new ArrayBuffer(l));
+		for (let i = 0; i < l; i++) {
+			a[i] = bs.charCodeAt(i);
+		}
+		return a;
+	}
 
 	static dataURI2bs(dURI) {
 		return atob(dURI.split(',')[1]);
