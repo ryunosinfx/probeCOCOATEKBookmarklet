@@ -68,11 +68,19 @@ export class ExporsFileDecoder {
 */
 		const header = u8a.slice(0, 16);
 		const body = u8a.slice(16);
-		const TemporaryExposureKeyExport = root.lookup('TemporaryExposureKeyExport');
+		const TemporaryExposureKeyExport = root.lookupType('TemporaryExposureKeyExport');
 		try {
 			console.log(body);
-			const decodedMessage = TemporaryExposureKeyExport.decode(body.buffer);
-			console.log(decodedMessage);
+			console.log(TemporaryExposureKeyExport);
+			const message = TemporaryExposureKeyExport.decode(body.buffer);
+			console.log(message);
+			const object = TemporaryExposureKeyExport.toObject(message, {
+				longs: String,
+				enums: String,
+				bytes: String,
+				// see ConversionOptions
+			});
+			return object;
 		} catch (e) {
 			console.warn(e);
 			if (e instanceof protobuf.util.ProtocolError) {
