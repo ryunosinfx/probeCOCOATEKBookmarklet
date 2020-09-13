@@ -111,7 +111,7 @@ module.exports = {
 						ecma: 2017,
 					},
 					output: {
-						comments: false,
+						comments: true,
 						beautify: false,
 					},
 				},
