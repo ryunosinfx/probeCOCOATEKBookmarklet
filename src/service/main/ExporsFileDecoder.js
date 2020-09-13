@@ -1,4 +1,4 @@
-import protobufjs from 'protobufjs';
+import protobuf from 'protobufjs';
 const TemporaryExposureKeyExport = JSON.stringify({
 	nested: {
 		TemporaryExposureKeyExport: {
