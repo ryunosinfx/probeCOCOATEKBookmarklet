@@ -73,7 +73,9 @@ export class Base64Util {
 	}
 	static s2u(s) {
 		const r = [];
+		console.log(s);
 		const sr = s.match(/\\u.{4}/gi);
+		console.log(sr);
 		if (!sr) {
 			return '';
 		}
