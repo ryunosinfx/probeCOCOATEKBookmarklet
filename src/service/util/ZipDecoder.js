@@ -21,7 +21,7 @@ export class ZipDecoder {
 				const bs = Base64Util.u8a2bs(unzip.decompress(filePath));
 				console.log(typeof bs);
 				console.log(bs);
-				const us = Base64Util.s2u(bs);
+				const us = Base64Util.bs2utf8(bs);
 				console.log(us);
 				retObj[filePath] = us;
 			}

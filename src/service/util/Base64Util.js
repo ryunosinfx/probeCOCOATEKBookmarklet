@@ -85,6 +85,11 @@ export class Base64Util {
 		return r.join('');
 	}
 
+	static bs2utf8(bs) {
+		const tc = new TextDecoder('utf-8');
+		const u8a = Base64Util.bs2u8a(bs);
+		return tc.decode(u8a.buffer);
+	}
 	static dataURI2bs(dURI) {
 		return atob(dURI.split(',')[1]);
 	}
