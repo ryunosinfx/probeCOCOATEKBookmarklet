@@ -2,12 +2,14 @@ import { PostMessager } from '../util/PostMessager';
 import { V } from '../util/V';
 import { FileDLHelper } from '../util/FileDLHelper';
 import { ZipDecoder } from '../util/ZipDecoder';
+import { ExporsFileDecoder } from './ExporsFileDecoder';
 import { fileListjson } from '../constants/Constants';
 const v = V.gi();
 export class MainLogic {
 	constructor() {
 		PostMessager.init();
 		this.strage = {};
+		this.ExporsFileDecoder = new ExporsFileDecoder();
 	}
 	async getList() {
 		console.log('MainLogic getList START');
@@ -37,7 +39,9 @@ export class MainLogic {
 		const blob = this.strage[path];
 		console.log('MainLogic getList blob:' + blob);
 		if (blob) {
-			ZipDecoder.decode(blob);
+			const result = ZipDecoder.decode(blob);
+			this.ExporsFileDecoder.decode(result['export.bin']);
+
 			console.log('MainLogic getList fn:' + fn);
 			FileDLHelper.dl(fn, blob, undefined, true);
 		}
