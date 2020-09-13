@@ -71,6 +71,15 @@ export class Base64Util {
 		}
 		return a;
 	}
+	static s2u(s) {
+		const r = [];
+		const sr = s.match(/\\u.{4}/gi);
+		const l = sr.length;
+		for (let i = 0; i < l; i++) {
+			r.push(String.fromCharCode(sr[i].replace('\\u', '0x')));
+		}
+		return r.join('');
+	}
 
 	static dataURI2bs(dURI) {
 		return atob(dURI.split(',')[1]);

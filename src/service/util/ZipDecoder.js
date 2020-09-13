@@ -18,7 +18,8 @@ export class ZipDecoder {
 
 			for (let filePath of importFileList) {
 				const bs = Base64Util.u8a2bs(unzip.decompress(filePath));
-				retObj[filePath] = bs;
+				const us = Base64Util.s2u(bs);
+				retObj[filePath] = us;
 			}
 			console.log('ZipDecoder decode -D-');
 		} catch (e) {
