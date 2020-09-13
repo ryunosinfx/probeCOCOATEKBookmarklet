@@ -75,6 +75,7 @@ export class Base64Util {
 		const r = [];
 		const sr = s.match(/\\u.{4}/gi);
 		const l = sr.length;
+		console.log(sr);
 		for (let i = 0; i < l; i++) {
 			r.push(String.fromCharCode(sr[i].replace('\\u', '0x')));
 		}
