@@ -1,5 +1,7 @@
 import protobuf from 'protobufjs';
-const TemporaryExposureKeyExport = JSON.stringify({
+const jsonDescriptor = JSON.stringify({
+	syntax: 'proto2',
+	package: null,
 	nested: {
 		TemporaryExposureKeyExport: {
 			fields: {
@@ -40,7 +42,7 @@ const TemporaryExposureKeyExport = JSON.stringify({
 	},
 });
 
-const root = protobuf.Root.fromJSON(TemporaryExposureKeyExport);
+const root = protobuf.Root.fromJSON(jsonDescriptor);
 export class ExporsFileDecoder {
 	decode(u8a) {
 		/**

@@ -9106,7 +9106,7 @@ const v=globalThis.Zlib;
 // EXTERNAL MODULE: ./node_modules/protobufjs/index.js
 var u=e(35),g=e.n(u);
 // CONCATENATED MODULE: ./src/service/main/ExporsFileDecoder.js
-const C=JSON.stringify({nested:{TemporaryExposureKeyExport:{fields:{start_timestamp:{type:"fixed64",id:1},end_timestamp:{type:"fixed64",id:2},region:{type:"string",id:3},batch_num:{type:"int32",id:4},batch_size:{type:"int32",id:5},signature_infos:{type:"SignatureInfo",id:6},keys:{type:"TemporaryExposureKey",id:7},revised_keys:{type:"TemporaryExposureKey",id:8}}}}}),f=g.a.Root.fromJSON(C);class h{decode(t){
+const C=JSON.stringify({syntax:"proto2",package:null,nested:{TemporaryExposureKeyExport:{fields:{start_timestamp:{type:"fixed64",id:1},end_timestamp:{type:"fixed64",id:2},region:{type:"string",id:3},batch_num:{type:"int32",id:4},batch_size:{type:"int32",id:5},signature_infos:{type:"SignatureInfo",id:6},keys:{type:"TemporaryExposureKey",id:7},revised_keys:{type:"TemporaryExposureKey",id:8}}}}}),f=g.a.Root.fromJSON(C);class h{decode(t){
 /**
       message TemporaryExposureKeyExport {
       // Time window of keys in this batch based on arrival to server, in UTC seconds.
