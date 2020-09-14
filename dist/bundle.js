@@ -9106,7 +9106,7 @@ const v=globalThis.Zlib;
 // EXTERNAL MODULE: ./node_modules/protobufjs/index.js
 var u=e(35),g=e.n(u);
 // CONCATENATED MODULE: ./src/service/main/ExporsFileDecoder.js
-const C=JSON.stringify({syntax:"proto2",package:null,nested:{TemporaryExposureKeyExport:{fields:{start_timestamp:{type:"fixed64",id:1},end_timestamp:{type:"fixed64",id:2},region:{type:"string",id:3},batch_num:{type:"int32",id:4},batch_size:{type:"int32",id:5},signature_infos:{type:"SignatureInfo",id:6},keys:{type:"TemporaryExposureKey",id:7},revised_keys:{type:"TemporaryExposureKey",id:8}}}}}),f=g.a.Root.fromJSON(C);class h{decode(t){
+const C=JSON.stringify({syntax:"proto2",package:"a",nested:{TemporaryExposureKeyExport:{fields:{start_timestamp:{type:"fixed64",id:1},end_timestamp:{type:"fixed64",id:2},region:{type:"string",id:3},batch_num:{type:"int32",id:4},batch_size:{type:"int32",id:5},signature_infos:{type:"SignatureInfo",id:6},keys:{type:"TemporaryExposureKey",id:7},revised_keys:{type:"TemporaryExposureKey",id:8}}}}}),f=g.a.Root.fromJSON(C);class h{decode(t){
 /**
       message TemporaryExposureKeyExport {
       // Time window of keys in this batch based on arrival to server, in UTC seconds.
@@ -9130,7 +9130,7 @@ const C=JSON.stringify({syntax:"proto2",package:null,nested:{TemporaryExposureKe
       repeated TemporaryExposureKey revised_keys = 8;
     } 
     */
-t.slice(0,16);const i=t.slice(16),e=f.lookupType("TemporaryExposureKeyExport");try{console.log(i),console.log("TemporaryExposureKeyExport:"+e);const t=e.decode(i.buffer);console.log(t);return e.toObject(t,{longs:String,enums:String,bytes:String})}catch(t){console.warn(t),g.a.util.ProtocolError}}}
+t.slice(0,16);const i=t.slice(16),e=f.lookupType("a.TemporaryExposureKeyExport");try{console.log(i),console.log("a.TemporaryExposureKeyExport:"+e);const t=e.decode(i.buffer);console.log(t);return e.toObject(t,{longs:String,enums:String,bytes:String})}catch(t){console.warn(t),g.a.util.ProtocolError}}}
 // EXTERNAL MODULE: ./src/service/constants/Constants.js
 var x=e(16);
 // CONCATENATED MODULE: ./src/service/main/MainLogic.js

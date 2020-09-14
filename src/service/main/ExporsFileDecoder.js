@@ -1,7 +1,7 @@
 import protobuf from 'protobufjs';
 const jsonDescriptor = JSON.stringify({
 	syntax: 'proto2',
-	package: null,
+	package: 'a',
 	nested: {
 		TemporaryExposureKeyExport: {
 			fields: {
@@ -70,10 +70,10 @@ export class ExporsFileDecoder {
 */
 		const header = u8a.slice(0, 16);
 		const body = u8a.slice(16);
-		const te = root.lookupType('TemporaryExposureKeyExport');
+		const te = root.lookupType('a.TemporaryExposureKeyExport');
 		try {
 			console.log(body);
-			console.log('TemporaryExposureKeyExport:' + te);
+			console.log('a.TemporaryExposureKeyExport:' + te);
 			const message = te.decode(body.buffer);
 			console.log(message);
 			const object = te.toObject(message, {
