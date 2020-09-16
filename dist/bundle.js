@@ -9106,7 +9106,24 @@ const v=globalThis.Zlib;
 // EXTERNAL MODULE: ./node_modules/protobufjs/index.js
 var u=e(35),g=e.n(u);
 // CONCATENATED MODULE: ./src/service/main/ExporsFileDecoder.js
-const C=JSON.stringify({syntax:"proto2",package:"a",nested:{TemporaryExposureKeyExport:{fields:{start_timestamp:{type:"fixed64",id:1},end_timestamp:{type:"fixed64",id:2},region:{type:"string",id:3},batch_num:{type:"int32",id:4},batch_size:{type:"int32",id:5},signature_infos:{type:"SignatureInfo",id:6},keys:{type:"TemporaryExposureKey",id:7},revised_keys:{type:"TemporaryExposureKey",id:8}}}}}),f=g.a.Root.fromJSON(C);class h{decode(t){
+JSON.stringify({syntax:"proto2",package:"a",nested:{TemporaryExposureKeyExport:{fields:{start_timestamp:{type:"fixed64",id:1},end_timestamp:{type:"fixed64",id:2},region:{type:"string",id:3},batch_num:{type:"int32",id:4},batch_size:{type:"int32",id:5},signature_infos:{type:"SignatureInfo",id:6},keys:{type:"TemporaryExposureKey",id:7},revised_keys:{type:"TemporaryExposureKey",id:8}}}}});// const Root = protobuf.Root,
+// 	Type = protobuf.Type,
+// 	Field = protobuf.Field;
+// const si = new Type('SignatureInfo');
+// teke.add(new Field('start_timestamp', 1, 'fixed64'));
+// const root = new Root().define('a').add(si);
+// const teke = new Type('TemporaryExposureKeyExport');
+// teke.add(new Field('start_timestamp', 1, 'fixed64'));
+// teke.add(new Field('end_timestamp', 2, 'fixed64'));
+// teke.add(new Field('region', 3, 'region'));
+// teke.add(new Field('batch_num', 4, 'int32'));
+// teke.add(new Field('batch_size', 5, 'int32'));
+// teke.add(new Field('signature_infos', 6, 'SignatureInfo'));
+// teke.add(new Field('keys', 5, 'TemporaryExposureKey'));
+// teke.add(new Field('revised_keys', 5, 'TemporaryExposureKey'));
+// const root = new Root().define('a').add(teke);
+// const root = protobuf.Root.fromJSON(jsonDescriptor);
+class C{async decode(t){
 /**
       message TemporaryExposureKeyExport {
       // Time window of keys in this batch based on arrival to server, in UTC seconds.
@@ -9129,12 +9146,53 @@ const C=JSON.stringify({syntax:"proto2",package:"a",nested:{TemporaryExposureKey
       // or have been revoked.
       repeated TemporaryExposureKey revised_keys = 8;
     } 
+    message SignatureInfo {
+    // The first two fields have been deprecated
+    reserved 1, 2;
+    reserved "app_bundle_id", "android_package";
+    // Key version for rollovers
+    // Must be in character class [a-zA-Z0-9_]. For example, 'v1'
+    optional string verification_key_version = 3;
+    // Alias with which to identify public key to be used for verification
+    // Must be in character class [a-zA-Z0-9_.]
+    // For cross-compatibility with Apple, you can use your region's three-digit
+    // mobile country code (MCC). If your region has more than one MCC, choose the
+    // one that Apple has configured.
+    optional string verification_key_id = 4;
+    // ASN.1 OID for Algorithm Identifier. For example, `1.2.840.10045.4.3.2'
+    optional string signature_algorithm = 5;
+    }
+    message TemporaryExposureKey {
+    // Key of infected user
+    optional bytes key_data = 1;
+    // Varying risk associated with a key depending on diagnosis method
+    optional int32 transmission_risk_level = 2 [deprecated = true];
+    // The interval number since epoch for which a key starts
+    optional int32 rolling_start_interval_number = 3;
+    // Increments of 10 minutes describing how long a key is valid
+    optional int32 rolling_period = 4
+    [default = 144]; // defaults to 24 hours
+    // Data type representing why this key was published.
+    enum ReportType {
+      UNKNOWN = 0;  // Never returned by the client API.
+      CONFIRMED_TEST = 1;
+      CONFIRMED_CLINICAL_DIAGNOSIS = 2;
+      SELF_REPORT = 3;
+      RECURSIVE = 4;  // Reserved for future use.
+      REVOKED = 5;  // Used to revoke a key, never returned by client API.
+    }
+     // Type of diagnosis associated with a key.
+    optional ReportType report_type = 5;
+     // Number of days elapsed between symptom onset and the TEK being used.
+    // E.g. 2 means TEK is 2 days after onset of symptoms.
+    optional sint32 days_since_onset_of_symptoms = 6;
+    }
     */
-t.slice(0,16);const i=t.slice(16),e=f.lookupType("a.TemporaryExposureKeyExport");try{console.log(i),console.log("a.TemporaryExposureKeyExport:"+e);const t=e.decode(i.buffer);console.log(t);return e.toObject(t,{longs:String,enums:String,bytes:String})}catch(t){console.warn(t),g.a.util.ProtocolError}}}
+t.slice(0,16);const i=t.slice(16),e=(await this.test()).lookupType("a.TemporaryExposureKeyExport");try{console.log(i),console.log("a.TemporaryExposureKeyExport:"+e);const t=e.decode(i.buffer);console.log(t);return e.toObject(t,{longs:String,enums:String,bytes:String})}catch(t){console.warn(t),g.a.util.ProtocolError}}test(){return new Promise(t=>{g.a.load("vendor/TemporaryExposureKeyExport.proto",(i,e)=>{if(i)throw i;t(e)})})}}
 // EXTERNAL MODULE: ./src/service/constants/Constants.js
-var x=e(16);
+var f=e(16);
 // CONCATENATED MODULE: ./src/service/main/MainLogic.js
-l.a.gi();class B{constructor(){c.a.init(),this.strage={},this.ExporsFileDecoder=new h}async getList(){console.log("MainLogic getList START");const t=await c.a.postToParent({path:x.a,isText:1});console.log(t);const i=t,e={};try{e.list=JSON.parse(i)}catch(t){}console.log("MainLogic getList END");const n=[];for(let t of e.list){const i=t.url;n.push(this.getZip(i))}return e.list}async getZip(t){const i=await c.a.postToParent({path:t});this.strage[t]=i}dl(t){const i=t.split("/"),e=i[i.length-1],n=this.strage[t];if(console.log("MainLogic getList blob:"+n),n){const t=class{static decode(t){console.log("ZipDecoder decode -0-dURI:"+t);const i=d.a.dataURI2bs(t),e=d.a.bs2u8a(i),n={};console.log("ZipDecoder decode -A-"),console.log(e);try{console.log("ZipDecoder decode -B-");const t=new v.Unzip(e),i=t.getFilenames();console.log("ZipDecoder decode -C-"),console.log(i);for(let e of i){console.log("ZipDecoder decode -C1-filePath:"+e);const i=d.a.u8a2bs(t.decompress(e));console.log(typeof i),console.log(i);const a=d.a.bs2u8a(i);console.log(a),n[e]=a}console.log("ZipDecoder decode -D-")}catch(t){console.warn(t.message)}return console.log("ZipDecoder retObj"),console.log(n),console.log("ZipDecoder decode -E-"),n}}.decode(n);this.ExporsFileDecoder.decode(t["export.bin"]),console.log("MainLogic getList fn:"+e),class{static dl(t,i,e="application/octetstream",n){console.log("FileDLHelper dl fileName:"+t);const a=m.gid("dlLinkAncker");//v.c('a');
+l.a.gi();class h{constructor(){c.a.init(),this.strage={},this.ExporsFileDecoder=new C}async getList(){console.log("MainLogic getList START");const t=await c.a.postToParent({path:f.a,isText:1});console.log(t);const i=t,e={};try{e.list=JSON.parse(i)}catch(t){}console.log("MainLogic getList END");const n=[];for(let t of e.list){const i=t.url;n.push(this.getZip(i))}return e.list}async getZip(t){const i=await c.a.postToParent({path:t});this.strage[t]=i}dl(t){const i=t.split("/"),e=i[i.length-1],n=this.strage[t];if(console.log("MainLogic getList blob:"+n),n){const t=class{static decode(t){console.log("ZipDecoder decode -0-dURI:"+t);const i=d.a.dataURI2bs(t),e=d.a.bs2u8a(i),n={};console.log("ZipDecoder decode -A-"),console.log(e);try{console.log("ZipDecoder decode -B-");const t=new v.Unzip(e),i=t.getFilenames();console.log("ZipDecoder decode -C-"),console.log(i);for(let e of i){console.log("ZipDecoder decode -C1-filePath:"+e);const i=d.a.u8a2bs(t.decompress(e));console.log(typeof i),console.log(i);const a=d.a.bs2u8a(i);console.log(a),n[e]=a}console.log("ZipDecoder decode -D-")}catch(t){console.warn(t.message)}return console.log("ZipDecoder retObj"),console.log(n),console.log("ZipDecoder decode -E-"),n}}.decode(n);this.ExporsFileDecoder.decode(t["export.bin"]),console.log("MainLogic getList fn:"+e),class{static dl(t,i,e="application/octetstream",n){console.log("FileDLHelper dl fileName:"+t);const a=m.gid("dlLinkAncker");//v.c('a');
 console.log("FileDLHelper dl dlLink:"+a),console.log(a),console.log(i),a.download=t,console.log("FileDLHelper dl dlLink.download:"+a.download),a.href=n?i:URL.createObjectURL(i,{type:e}),console.log("FileDLHelper dl dlLink.href:"+a.href),// v.a(v.b, dlLink);
 console.log("FileDLHelper dl dlLink.parentNode:"+a.parentNode),// dlLink.dataset.downloadurl = [contentType, fileName, dlLink.href].join(':');
 a.click(),console.log("FileDLHelper dl dlLink.parentNode:"+a.parentNode),setTimeout(()=>{console.log("FileDLHelper dl remove!"),URL.revokeObjectURL(a.href)}// v.re(dlLink);
@@ -9153,12 +9211,12 @@ a.click(),console.log("FileDLHelper dl dlLink.parentNode:"+a.parentNode),setTime
 
 
 
-/* harmony default export */var b={el:"#main",name:"main",components:{},data:()=>({greeting:"Hello",loadedData:{list:[]}}),created(){this.main=new B},async mounted(){const t=await this.main.getList();console.log("mounted list:"+typeof t),this.loadedData.list=t},methods:{dl(t){console.log("CCCCCCCCCCCCCCCCCCCCCCCurl:"+t),this.main.dl(t)},test(t){alert("e:"+t)}}};
+/* harmony default export */var x={el:"#main",name:"main",components:{},data:()=>({greeting:"Hello",loadedData:{list:[]}}),created(){this.main=new h},async mounted(){const t=await this.main.getList();console.log("mounted list:"+typeof t),this.loadedData.list=t},methods:{dl(t){console.log("CCCCCCCCCCCCCCCCCCCCCCCurl:"+t),this.main.dl(t)},test(t){alert("e:"+t)}}};
 // CONCATENATED MODULE: ./src/Main.vue?vue&type=script&lang=js&
 /* harmony default export */e(76);
 // CONCATENATED MODULE: ./src/Main.vue
 /* normalize component */
-var y=
+var B=
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
 /* globals __VUE_SSR_CONTEXT__ */
 // IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
@@ -9194,16 +9252,16 @@ s._injectStyles=p;
 // register for functional component in vue file
 var A=s.render;s.render=function(t,i){return p.call(i),A(t,i)}}else{
 // inject component registration as beforeCreate hook
-var c=s.beforeCreate;s.beforeCreate=c?[].concat(c,p):[p]}return{exports:t,options:s}}(b,A,[],0,null,null,null)
-/* hot reload */;y.options.__file="src/Main.vue"
-/* harmony default export */;var _=y.exports;
+var c=s.beforeCreate;s.beforeCreate=c?[].concat(c,p):[p]}return{exports:t,options:s}}(x,A,[],0,null,null,null)
+/* hot reload */;B.options.__file="src/Main.vue"
+/* harmony default export */;var b=B.exports;
 // CONCATENATED MODULE: ./src/main.js
 (async()=>{const t=window.parent;// alert(wp === window);
 if(console.log("wp"),console.log(t),!t||t===window)return void await class{static async main(){const t=location.href,i=await p.a.l(t+"dist/bookmarklet.js",void 0,1);s.a(s.b,s.h1("bookmarklet !"));const e=s.an("bookmarkletAncker");s.a(s.b,e),e.href=
 // CONCATENATED MODULE: ./src/service/util/BookmarkletBuilder.js
 class{static build(t){return`javascript:(()=>{${t.split("\t").join("").split("\n").join("")}})()`}}.build(i)}}.main();const i="app"+Date.now(),e=globalThis.document,a=e.getElementsByTagName("body")[0];for(let t of a.children)t.style.display="none";if(!e.getElementById(i)){const t=e.createElement("div");t.setAttribute("id",i),a.appendChild(t)}new n.default({el:"#"+i,
 // アプリをマウントする要素(セレクタで指定)
-components:{App:_},
+components:{App:b},
 // Appというコンポーネントを使うよ、という宣言
 template:"<app/>",
 // el(今回は#app)の中に表示する内容
