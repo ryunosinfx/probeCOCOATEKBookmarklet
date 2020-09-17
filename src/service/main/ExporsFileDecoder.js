@@ -154,7 +154,7 @@ message TemporaryExposureKey {
 	}
 	test() {
 		const f = (resolve) => {
-			protobuf.load('vendor/TemporaryExposureKeyExport.proto', (err, root) => {
+			protobuf.load('dist/vendor/TemporaryExposureKeyExport.proto', (err, root) => {
 				if (err) {
 					throw err;
 				}
