@@ -9188,7 +9188,7 @@ class C{async decode(t){
     optional sint32 days_since_onset_of_symptoms = 6;
     }
     */
-t.slice(0,16);const i=t.slice(16),e=(await this.test()).lookupType("a.TemporaryExposureKeyExport");try{console.log(i),console.log("a.TemporaryExposureKeyExport:"+e);const t=e.decode(i.buffer);console.log(t);return e.toObject(t,{longs:String,enums:String,bytes:String})}catch(t){console.warn(t),g.a.util.ProtocolError}}test(){return new Promise(t=>{g.a.load("dist/vendor/TemporaryExposureKeyExport.proto",(i,e)=>{if(i)throw i;t(e)})})}}
+t.slice(0,16);const i=t.slice(16),e=(await this.test()).lookupType("TemporaryExposureKeyExport");try{console.log(i),console.log("TemporaryExposureKeyExport:"+e);const t=e.decode(i.buffer);console.log(t);return e.toObject(t,{longs:String,enums:String,bytes:String})}catch(t){console.warn(t),g.a.util.ProtocolError}}test(){return new Promise(t=>{g.a.load("dist/vendor/TemporaryExposureKeyExport.proto",(i,e)=>{if(i)throw i;t(e)})})}}
 // EXTERNAL MODULE: ./src/service/constants/Constants.js
 var f=e(16);
 // CONCATENATED MODULE: ./src/service/main/MainLogic.js

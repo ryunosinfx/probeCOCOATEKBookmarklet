@@ -130,10 +130,10 @@ message TemporaryExposureKey {
 		const header = u8a.slice(0, 16);
 		const body = u8a.slice(16);
 		const root = await this.test();
-		const te = root.lookupType('a.TemporaryExposureKeyExport');
+		const te = root.lookupType('TemporaryExposureKeyExport');
 		try {
 			console.log(body);
-			console.log('a.TemporaryExposureKeyExport:' + te);
+			console.log('TemporaryExposureKeyExport:' + te);
 			const message = te.decode(body.buffer);
 			console.log(message);
 			const object = te.toObject(message, {
