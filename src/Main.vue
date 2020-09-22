@@ -4,7 +4,7 @@
 		<p v-on:click="test">click and download!</p>
 		<ul>
 			<li v-for="item in loadedData.list" :key="item.url">
-				created:{{ new Date(item.created).toISOString() }}/{{ item.hex }} /{{ JSON.stringfy(item.file) }}
+				created:{{ new Date(item.created).toISOString() }}/{{ item.hex }} /{{ JSON.stringify(item.file) }}
 				<button class="zipdllink" v-on:click="dl(item.url)">{{ item.url }} DL</button>
 			</li>
 		</ul>
