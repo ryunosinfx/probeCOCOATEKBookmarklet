@@ -63,6 +63,15 @@ export class Base64Util {
 		const b = Base64Util.aToB64(ai);
 		return Base64Util.toB64u(b);
 	}
+	static b64toHex(b64) {
+		const bs = atob(b64);
+		const u8a = ase64Util.bs2u8a(bs);
+		const rl = [];
+		for (let i of u8a) {
+			rl.push(i.toString(16));
+		}
+		return rl.join('');
+	}
 	static bs2u8a(bs) {
 		const l = bs.length;
 		const a = new Uint8Array(new ArrayBuffer(l));

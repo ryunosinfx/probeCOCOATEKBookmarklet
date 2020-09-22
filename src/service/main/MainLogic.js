@@ -26,22 +26,25 @@ export class MainLogic {
 			const url = row.url;
 			promises.push(this.getZip(url));
 		}
-
+		await Promise.all(promises);
 		return obj.list;
 	}
 	async getZip(path) {
 		const blob = await PostMessager.postToParent({ path });
-		this.strage[path] = blob;
+		const decoded = ZipDecoder.decode(blob);
+		const hash = decoded['export.bin'].hash;
+		const file = this.ExporsFileDecoder.decode(decoded['export.bin'].u8a);
+		this.strage[path] = { blob, hash, file };
+	}
+	get(path) {
+		return this.strage[path];
 	}
 	dl(path) {
 		const fns = path.split('/');
 		const fn = fns[fns.length - 1];
-		const blob = this.strage[path];
+		const blob = this.strage[path].blob;
 		console.log('MainLogic getList blob:' + blob);
 		if (blob) {
-			const result = ZipDecoder.decode(blob);
-			this.ExporsFileDecoder.decode(result['export.bin']);
-
 			console.log('MainLogic getList fn:' + fn);
 			FileDLHelper.dl(fn, blob, undefined, true);
 		}

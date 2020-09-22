@@ -4,7 +4,8 @@
 		<p v-on:click="test">click and download!</p>
 		<ul>
 			<li v-for="item in loadedData.list" :key="item.url">
-				created:{{ new Date(item.created).toISOString() }} <button class="zipdllink" v-on:click="dl(item.url)">{{ item.url }} DL</button>
+				created:{{ new Date(item.created).toISOString() }}/{{ item.hex }} /{{ JSON.stringfy(item.file) }}
+				<button class="zipdllink" v-on:click="dl(item.url)">{{ item.url }} DL</button>
 			</li>
 		</ul>
 		<a id="dlLinkAncker"></a>
@@ -28,6 +29,11 @@ export default {
 	},
 	async mounted() {
 		const list = await this.main.getList();
+		for (let row of list) {
+			const data = this.main.get(row.url);
+			row.file = row.file;
+			row.hex = row.hex;
+		}
 		console.log('mounted list:' + typeof list);
 		this.loadedData.list = list;
 	},
