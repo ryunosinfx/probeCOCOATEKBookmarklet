@@ -32,8 +32,9 @@ export class MainLogic {
 	async getZip(path) {
 		const blob = await PostMessager.postToParent({ path });
 		const decoded = ZipDecoder.decode(blob);
-		const hash = decoded['export.bin'].hash;
-		const file = this.ExporsFileDecoder.decode(decoded['export.bin'].u8a);
+		const bin = decoded['export.bin'];
+		const hash = bin.hash;
+		const file = bin ? this.ExporsFileDecoder.decode(bin.u8a) : {};
 		this.strage[path] = { blob, hash, file };
 	}
 	get(path) {
