@@ -65,7 +65,7 @@ export class Base64Util {
 	}
 	static b64toHex(b64) {
 		const bs = atob(b64);
-		const u8a = ase64Util.bs2u8a(bs);
+		const u8a = Base64Util.bs2u8a(bs);
 		const rl = [];
 		for (let i of u8a) {
 			rl.push(i.toString(16));
