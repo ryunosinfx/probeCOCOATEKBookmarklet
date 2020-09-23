@@ -31,7 +31,7 @@ export class MainLogic {
 	}
 	async getZip(path) {
 		const blob = await PostMessager.postToParent({ path });
-		const decoded = ZipDecoder.decode(blob);
+		const decoded = await ZipDecoder.decode(blob);
 		const bin = decoded['export.bin'];
 		console.log('----decoded---getZip bin:' + bin);
 		console.log(decoded);
