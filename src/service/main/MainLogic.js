@@ -36,7 +36,7 @@ export class MainLogic {
 		console.log('----decoded---getZip bin:' + bin);
 		console.log(decoded);
 		const hash = bin ? bin.hash : null;
-		const file = bin ? this.ExporsFileDecoder.decode(bin.u8a) : {};
+		const file = bin ? await this.ExporsFileDecoder.decode(bin.u8a) : {};
 		this.strage[path] = { blob, hash, file };
 	}
 	get(path) {
