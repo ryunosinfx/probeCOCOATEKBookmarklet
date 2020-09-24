@@ -9108,13 +9108,13 @@ const u=globalThis.Zlib;
 // EXTERNAL MODULE: ./node_modules/protobufjs/index.js
 var g=e(36),C=e.n(g);
 // CONCATENATED MODULE: ./src/service/main/ExporsFileDecoder.js
-class f{async decode(t){t.slice(0,16);const i=t.slice(16),e=(await this.loadProto()).lookupType("TemporaryExposureKeyExport");try{console.log(i),console.log("TemporaryExposureKeyExport:"+e);const t=e.decode(i),n=e.toObject(t,{longs:String,enums:String,bytes:String});if(console.log("ExporsFileDecoder decode obj"),console.log(n),n.keys&&Array.isArray(n.keys))for(let t of n.keys)
+const f={};class h{async decode(t){t.slice(0,16);f.root||(f.root=await h.loadProto());const i=t.slice(16),e=f.root.lookupType("TemporaryExposureKeyExport");try{console.log(i),console.log("TemporaryExposureKeyExport:"+e);const t=e.decode(i),n=e.toObject(t,{longs:String,enums:String,bytes:String});if(console.log("ExporsFileDecoder decode obj"),console.log(n),n.keys&&Array.isArray(n.keys))for(let t of n.keys)
 // console.log(key.keyData);
-t.keyData=t.keyData&&"string"==typeof t.keyData?t.keyData:d.a.aToB64u(t.keyData);return n}catch(t){console.warn(t),C.a.util.ProtocolError}}loadProto(){return new Promise(t=>{C.a.load("dist/vendor/TemporaryExposureKeyExport.proto",(i,e)=>{if(i)throw i;t(e)})})}}
+t.keyData=t.keyData&&"string"==typeof t.keyData?t.keyData:d.a.aToB64u(t.keyData);return n}catch(t){console.warn(t),C.a.util.ProtocolError}}static loadProto(){return new Promise(t=>{C.a.load("dist/vendor/TemporaryExposureKeyExport.proto",(i,e)=>{if(i)throw i;t(e)})})}}
 // EXTERNAL MODULE: ./src/service/constants/Constants.js
-var h=e(17);
+var x=e(17);
 // CONCATENATED MODULE: ./src/service/main/MainLogic.js
-l.a.gi();class x{constructor(){c.a.init(),this.strage={},this.ExporsFileDecoder=new f}async getList(){console.log("MainLogic getList START");const t=await c.a.postToParent({path:h.a,isText:1});console.log(t);const i=t,e={};try{e.list=JSON.parse(i)}catch(t){}console.log("MainLogic getList END");const n=[];for(let t of e.list)n.push(this.getZip(t));return await Promise.all(n),e.list}async getZip(t){const i=await c.a.postToParent({path:t.url}),e=await class{static async decode(t){console.log("ZipDecoder decode -0-dURI:"+t);const i=d.a.dataURI2bs(t),e=d.a.bs2u8a(i),n={};console.log("ZipDecoder decode -A-"),console.log(e);try{console.log("ZipDecoder decode -B-");const t=new u.Unzip(e),i=t.getFilenames();console.log("ZipDecoder decode -C-"),console.log(i);for(let e of i){console.log("ZipDecoder decode -C1-filePath:"+e);const i=d.a.u8a2bs(t.decompress(e));console.log(typeof i),console.log(i);const a=await v.a.sha256(i),r=d.a.b64toHex(a),o=d.a.bs2u8a(i);console.log(o),n[e]={u8a:o,hex:r}}console.log("ZipDecoder decode -D-")}catch(t){console.warn(t.message)}return console.log("ZipDecoder retObj"),console.log(n),console.log("ZipDecoder decode -E-"),n}}.decode(i),n=e["export.bin"];console.log("----decoded---getZip bin:"+n),console.log(e);const a=n?n.hash:null,r=n?await this.ExporsFileDecoder.decode(n.u8a):{};t.file=r,t.hex=a,this.strage[path]={blob:i,hash:a,file:r}}get(t){return this.strage[t]}dl(t){const i=t.split("/"),e=i[i.length-1],n=this.strage[t].blob;console.log("MainLogic getList blob:"+n),n&&(console.log("MainLogic getList fn:"+e),class{static dl(t,i,e="application/octetstream",n){const a=m.gid("dlLinkAncker");a.download=t,a.href=n?i:URL.createObjectURL(i,{type:e}),a.click(),setTimeout(()=>{URL.revokeObjectURL(a.href)},1e3)}}.dl(e,n,void 0,1))}}
+l.a.gi();class B{constructor(){c.a.init(),this.strage={},this.ExporsFileDecoder=new h}async getList(){console.log("MainLogic getList START");const t=await c.a.postToParent({path:x.a,isText:1});console.log(t);const i=t,e={};try{e.list=JSON.parse(i)}catch(t){}console.log("MainLogic getList END");const n=[];for(let t of e.list)n.push(this.getZip(t));return await Promise.all(n),e.list}async getZip(t){const i=await c.a.postToParent({path:t.url}),e=await class{static async decode(t){console.log("ZipDecoder decode -0-dURI:"+t);const i=d.a.dataURI2bs(t),e=d.a.bs2u8a(i),n={};console.log("ZipDecoder decode -A-"),console.log(e);try{console.log("ZipDecoder decode -B-");const t=new u.Unzip(e),i=t.getFilenames();console.log("ZipDecoder decode -C-"),console.log(i);for(let e of i){console.log("ZipDecoder decode -C1-filePath:"+e);const i=d.a.u8a2bs(t.decompress(e));console.log(typeof i),console.log(i);const a=await v.a.sha256(i),r=d.a.b64toHex(a),o=d.a.bs2u8a(i);console.log(o),n[e]={u8a:o,hex:r}}console.log("ZipDecoder decode -D-")}catch(t){console.warn(t.message)}return console.log("ZipDecoder retObj"),console.log(n),console.log("ZipDecoder decode -E-"),n}}.decode(i),n=e["export.bin"];console.log("----decoded---getZip bin:"+n),console.log(e);const a=n?n.hash:null,r=n?await this.ExporsFileDecoder.decode(n.u8a):{};t.file=r,t.hex=a,this.strage[path]={blob:i,hash:a,file:r}}get(t){return this.strage[t]}dl(t){const i=t.split("/"),e=i[i.length-1],n=this.strage[t].blob;console.log("MainLogic getList blob:"+n),n&&(console.log("MainLogic getList fn:"+e),class{static dl(t,i,e="application/octetstream",n){const a=m.gid("dlLinkAncker");a.download=t,a.href=n?i:URL.createObjectURL(i,{type:e}),a.click(),setTimeout(()=>{URL.revokeObjectURL(a.href)},1e3)}}.dl(e,n,void 0,1))}}
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/Main.vue?vue&type=script&lang=js&
 
 
@@ -9130,12 +9130,12 @@ l.a.gi();class x{constructor(){c.a.init(),this.strage={},this.ExporsFileDecoder=
 
 
 
-/* harmony default export */var B={el:"#main",name:"main",components:{},data:()=>({greeting:"Hello",loadedData:{list:[]}}),created(){this.main=new x},async mounted(){const t=await this.main.getList();for(let i of t){this.main.get(i.url);i.file=i.file,i.hex=i.hex}console.log("mounted list:"+typeof t),this.loadedData.list=t},methods:{dl(t){console.log("CCCCCCCCCCCCCCCCCCCCCCCurl:"+t),this.main.dl(t)},test(t){alert("e:"+t)}}};
+/* harmony default export */var b={el:"#main",name:"main",components:{},data:()=>({greeting:"Hello",loadedData:{list:[]}}),created(){this.main=new B},async mounted(){const t=await this.main.getList();for(let i of t){this.main.get(i.url);i.file=i.file,i.hex=i.hex}console.log("mounted list:"+typeof t),this.loadedData.list=t},methods:{dl(t){console.log("CCCCCCCCCCCCCCCCCCCCCCCurl:"+t),this.main.dl(t)},test(t){alert("e:"+t)}}};
 // CONCATENATED MODULE: ./src/Main.vue?vue&type=script&lang=js&
 /* harmony default export */e(77);
 // CONCATENATED MODULE: ./src/Main.vue
 /* normalize component */
-var b=
+var y=
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
 /* globals __VUE_SSR_CONTEXT__ */
 // IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
@@ -9171,16 +9171,16 @@ s._injectStyles=p;
 // register for functional component in vue file
 var A=s.render;s.render=function(t,i){return p.call(i),A(t,i)}}else{
 // inject component registration as beforeCreate hook
-var c=s.beforeCreate;s.beforeCreate=c?[].concat(c,p):[p]}return{exports:t,options:s}}(B,A,[],0,null,null,null)
-/* hot reload */;b.options.__file="src/Main.vue"
-/* harmony default export */;var y=b.exports;
+var c=s.beforeCreate;s.beforeCreate=c?[].concat(c,p):[p]}return{exports:t,options:s}}(b,A,[],0,null,null,null)
+/* hot reload */;y.options.__file="src/Main.vue"
+/* harmony default export */;var _=y.exports;
 // CONCATENATED MODULE: ./src/main.js
 (async()=>{const t=window.parent;// alert(wp === window);
 if(console.log("wp"),console.log(t),!t||t===window)return void await class{static async main(){const t=location.href,i=await p.a.l(t+"dist/bookmarklet.js",void 0,1);s.a(s.b,s.h1("bookmarklet !"));const e=s.an("bookmarkletAncker");s.a(s.b,e),e.href=
 // CONCATENATED MODULE: ./src/service/util/BookmarkletBuilder.js
 class{static build(t){return`javascript:(()=>{${t.split("\t").join("").split("\n").join("")}})()`}}.build(i)}}.main();const i="app"+Date.now(),e=globalThis.document,a=e.getElementsByTagName("body")[0];for(let t of a.children)t.style.display="none";if(!e.getElementById(i)){const t=e.createElement("div");t.setAttribute("id",i),a.appendChild(t)}new n.default({el:"#"+i,
 // アプリをマウントする要素(セレクタで指定)
-components:{App:y},
+components:{App:_},
 // Appというコンポーネントを使うよ、という宣言
 template:"<app/>",
 // el(今回は#app)の中に表示する内容

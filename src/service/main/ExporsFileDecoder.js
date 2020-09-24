@@ -1,11 +1,14 @@
 import protobuf from 'protobufjs';
 import { Base64Util } from '../util/Base64Util';
+const data = {};
 export class ExporsFileDecoder {
 	async decode(u8a) {
 		const header = u8a.slice(0, 16);
+		if (!data.root) {
+			data.root = await ExporsFileDecoder.loadProto();
+		}
 		const body = u8a.slice(16);
-		const root = await this.loadProto();
-		const te = root.lookupType('TemporaryExposureKeyExport');
+		const te = data.root.lookupType('TemporaryExposureKeyExport');
 		try {
 			console.log(body);
 			console.log('TemporaryExposureKeyExport:' + te);
@@ -34,7 +37,7 @@ export class ExporsFileDecoder {
 			}
 		}
 	}
-	loadProto() {
+	static loadProto() {
 		const f = (resolve) => {
 			protobuf.load('dist/vendor/TemporaryExposureKeyExport.proto', (err, root) => {
 				if (err) {
