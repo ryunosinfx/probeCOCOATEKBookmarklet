@@ -60,7 +60,9 @@ export class Base64Util {
 		return btoa(Base64Util.ab2bs(ab));
 	}
 	static aToB64u(ai) {
+		console.log(ai);
 		const b = Base64Util.aToB64(ai);
+		console.log('aToB64u b:' + b);
 		return Base64Util.toB64u(b);
 	}
 	static b64toHex(b64) {
