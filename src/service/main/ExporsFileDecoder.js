@@ -1,4 +1,5 @@
 import protobuf from 'protobufjs';
+import { Base64Util } from '../util/Base64Util';
 export class ExporsFileDecoder {
 	async decode(u8a) {
 		const header = u8a.slice(0, 16);
@@ -10,13 +11,18 @@ export class ExporsFileDecoder {
 			console.log('TemporaryExposureKeyExport:' + te);
 			const message = te.decode(body);
 			console.log(message);
-			const object = te.toObject(message, {
+			const obj = te.toObject(message, {
 				longs: String,
 				enums: String,
 				bytes: String,
 				// see ConversionOptions
 			});
-			return object;
+			if (obj.keys && Array.isArray(obj.keys)) {
+				for (let key of obj.keys) {
+					key.keyData = Base64Util.aToB64u(key.keyData);
+				}
+			}
+			return obj;
 		} catch (e) {
 			console.warn(e);
 			if (e instanceof protobuf.util.ProtocolError) {
