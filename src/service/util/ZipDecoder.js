@@ -18,17 +18,23 @@ export class ZipDecoder {
 			console.log(importFileList);
 
 			for (let filePath of importFileList) {
-				console.log('ZipDecoder decode -C1-filePath:' + filePath);
-				const bs = Base64Util.u8a2bs(unzip.decompress(filePath));
-				console.log(typeof bs);
-				console.log(bs);
-				const hashB64 = await Hasher.sha256(bs);
-				const hex = Base64Util.b64toHex(hashB64).toUpperCase();
-				console.log('ZipDecoder decode -C2-filePath:' + filePath);
-				const u8a = Base64Util.bs2u8a(bs);
-				console.log('ZipDecoder decode -C3-filePath:' + filePath);
-				console.log(u8a);
-				retObj[filePath] = { u8a, hex };
+				try {
+					console.log('ZipDecoder decode -C1-filePath:' + filePath);
+					const bs = Base64Util.u8a2bs(unzip.decompress(filePath));
+					console.log(typeof bs);
+					console.log(bs);
+					const hashB64 = await Hasher.sha256(bs);
+					const hex = Base64Util.b64toHex(hashB64).toUpperCase();
+					console.log('ZipDecoder decode -C2-filePath:' + filePath);
+					const u8a = Base64Util.bs2u8a(bs);
+					console.log('ZipDecoder decode -C3-filePath:' + filePath);
+					console.log(u8a);
+					retObj[filePath] = { u8a, hex };
+				} catch (e) {
+					console.warn(filePath);
+					console.warn(e);
+					console.warn(e.message);
+				}
 			}
 			console.log('ZipDecoder decode -D-');
 		} catch (e) {
