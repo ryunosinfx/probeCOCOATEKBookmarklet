@@ -10,13 +10,14 @@ export class ExporsFileDecoder {
 			console.log(body);
 			console.log('TemporaryExposureKeyExport:' + te);
 			const message = te.decode(body);
-			console.log(message);
 			const obj = te.toObject(message, {
 				longs: String,
 				enums: String,
 				bytes: String,
 				// see ConversionOptions
 			});
+			console.log('ExporsFileDecoder decode obj');
+			console.log(obj);
 			if (obj.keys && Array.isArray(obj.keys)) {
 				for (let key of obj.keys) {
 					key.keyData = Base64Util.aToB64u(key.keyData);
