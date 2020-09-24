@@ -12,6 +12,7 @@ export class MainLogic {
 		this.ExporsFileDecoder = new ExporsFileDecoder();
 	}
 	async getList() {
+		await this.ExporsFileDecoder.init;
 		console.log('MainLogic getList START');
 		const result = await PostMessager.postToParent({ path: fileListjson, isText: true });
 		console.log(result);

@@ -2,11 +2,17 @@ import protobuf from 'protobufjs';
 import { Base64Util } from '../util/Base64Util';
 const data = {};
 export class ExporsFileDecoder {
+	constructor() {
+		const f = async () => {
+			if (!data.root) {
+				data.root = await ExporsFileDecoder.loadProto();
+			}
+		};
+		this.init = f();
+	}
 	async decode(u8a) {
-		const header = u8a.slice(0, 16);
-		if (!data.root) {
-			data.root = await ExporsFileDecoder.loadProto();
-		}
+		await this.init;
+		// const header = u8a.slice(0, 16); //
 		const body = u8a.slice(16);
 		const te = data.root.lookupType('TemporaryExposureKeyExport');
 		try {
