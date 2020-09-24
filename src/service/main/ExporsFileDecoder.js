@@ -21,7 +21,7 @@ export class ExporsFileDecoder {
 			if (obj.keys && Array.isArray(obj.keys)) {
 				for (let key of obj.keys) {
 					console.log(key.keyData);
-					key.keyData = Base64Util.aToB64u(key.keyData);
+					key.keyData = key.keyData && typeof key.keyData === 'string' ? key.keyData : Base64Util.aToB64u(key.keyData);
 				}
 			}
 			return obj;

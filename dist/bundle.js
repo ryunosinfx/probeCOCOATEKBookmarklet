@@ -9108,7 +9108,7 @@ const u=globalThis.Zlib;
 // EXTERNAL MODULE: ./node_modules/protobufjs/index.js
 var g=e(36),C=e.n(g);
 // CONCATENATED MODULE: ./src/service/main/ExporsFileDecoder.js
-class f{async decode(t){t.slice(0,16);const i=t.slice(16),e=(await this.loadProto()).lookupType("TemporaryExposureKeyExport");try{console.log(i),console.log("TemporaryExposureKeyExport:"+e);const t=e.decode(i),n=e.toObject(t,{longs:String,enums:String,bytes:String});if(console.log("ExporsFileDecoder decode obj"),console.log(n),n.keys&&Array.isArray(n.keys))for(let t of n.keys)console.log(t.keyData),t.keyData=d.a.aToB64u(t.keyData);return n}catch(t){console.warn(t),C.a.util.ProtocolError}}loadProto(){return new Promise(t=>{C.a.load("dist/vendor/TemporaryExposureKeyExport.proto",(i,e)=>{if(i)throw i;t(e)})})}}
+class f{async decode(t){t.slice(0,16);const i=t.slice(16),e=(await this.loadProto()).lookupType("TemporaryExposureKeyExport");try{console.log(i),console.log("TemporaryExposureKeyExport:"+e);const t=e.decode(i),n=e.toObject(t,{longs:String,enums:String,bytes:String});if(console.log("ExporsFileDecoder decode obj"),console.log(n),n.keys&&Array.isArray(n.keys))for(let t of n.keys)console.log(t.keyData),t.keyData=t.keyData&&"string"==typeof t.keyData?t.keyData:d.a.aToB64u(t.keyData);return n}catch(t){console.warn(t),C.a.util.ProtocolError}}loadProto(){return new Promise(t=>{C.a.load("dist/vendor/TemporaryExposureKeyExport.proto",(i,e)=>{if(i)throw i;t(e)})})}}
 // EXTERNAL MODULE: ./src/service/constants/Constants.js
 var h=e(17);
 // CONCATENATED MODULE: ./src/service/main/MainLogic.js
