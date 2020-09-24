@@ -23,20 +23,21 @@ export class MainLogic {
 		console.log('MainLogic getList END');
 		const promises = [];
 		for (let row of obj.list) {
-			const url = row.url;
-			promises.push(this.getZip(url));
+			promises.push(this.getZip(row));
 		}
 		await Promise.all(promises);
 		return obj.list;
 	}
-	async getZip(path) {
-		const blob = await PostMessager.postToParent({ path });
+	async getZip(row) {
+		const blob = await PostMessager.postToParent({ path: row.url });
 		const decoded = await ZipDecoder.decode(blob);
 		const bin = decoded['export.bin'];
 		console.log('----decoded---getZip bin:' + bin);
 		console.log(decoded);
 		const hash = bin ? bin.hash : null;
 		const file = bin ? await this.ExporsFileDecoder.decode(bin.u8a) : {};
+		row.file = file;
+		row.hex = hash;
 		this.strage[path] = { blob, hash, file };
 	}
 	get(path) {
