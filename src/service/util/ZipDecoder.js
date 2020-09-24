@@ -24,12 +24,15 @@ export class ZipDecoder {
 				console.log(bs);
 				const hashB64 = await Hasher.sha256(bs);
 				const hex = Base64Util.b64toHex(hashB64).toUpperCase();
+				console.log('ZipDecoder decode -C2-filePath:' + filePath);
 				const u8a = Base64Util.bs2u8a(bs);
+				console.log('ZipDecoder decode -C3-filePath:' + filePath);
 				console.log(u8a);
 				retObj[filePath] = { u8a, hex };
 			}
 			console.log('ZipDecoder decode -D-');
 		} catch (e) {
+			console.warn(e);
 			console.warn(e.message);
 		}
 		console.log('ZipDecoder retObj');
