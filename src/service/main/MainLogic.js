@@ -22,11 +22,15 @@ export class MainLogic {
 			obj.list = JSON.parse(msg);
 		} catch (e) {}
 		console.log('MainLogic getList END');
-		const promises = [];
-		for (let row of obj.list) {
-			promises.push(this.getZip(row));
+		try {
+			const promises = [];
+			for (let row of obj.list) {
+				promises.push(this.getZip(row));
+			}
+			await Promise.all(promises);
+		} catch (e) {
+			console.error(e);
 		}
-		await Promise.all(promises);
 		return obj.list;
 	}
 	async getZip(row) {
