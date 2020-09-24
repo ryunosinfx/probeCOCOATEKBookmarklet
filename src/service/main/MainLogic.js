@@ -43,7 +43,7 @@ export class MainLogic {
 		const file = bin ? await this.ExporsFileDecoder.decode(bin.u8a) : {};
 		row.file = file;
 		row.hex = hex;
-		this.strage[path] = { blob, hex, file };
+		this.strage[row.url] = blob;
 	}
 	get(path) {
 		return this.strage[path];
@@ -51,7 +51,7 @@ export class MainLogic {
 	dl(path) {
 		const fns = path.split('/');
 		const fn = fns[fns.length - 1];
-		const blob = this.strage[path].blob;
+		const blob = this.strage[path];
 		console.log('MainLogic getList blob:' + blob);
 		if (blob) {
 			console.log('MainLogic getList fn:' + fn);
