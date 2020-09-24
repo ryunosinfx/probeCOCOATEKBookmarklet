@@ -23,7 +23,7 @@ export class ZipDecoder {
 				console.log(typeof bs);
 				console.log(bs);
 				const hashB64 = await Hasher.sha256(bs);
-				const hex = Base64Util.b64toHex(hashB64);
+				const hex = Base64Util.b64toHex(hashB64).toUpperCase();
 				const u8a = Base64Util.bs2u8a(bs);
 				console.log(u8a);
 				retObj[filePath] = { u8a, hex };

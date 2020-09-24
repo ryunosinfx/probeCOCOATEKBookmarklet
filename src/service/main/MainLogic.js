@@ -39,11 +39,11 @@ export class MainLogic {
 		const bin = decoded['export.bin'];
 		console.log('----decoded---getZip bin:' + bin);
 		console.log(decoded);
-		const hash = bin ? bin.hash : null;
+		const hex = bin ? bin.hex : null;
 		const file = bin ? await this.ExporsFileDecoder.decode(bin.u8a) : {};
 		row.file = file;
-		row.hex = hash;
-		this.strage[path] = { blob, hash, file };
+		row.hex = hex;
+		this.strage[path] = { blob, hex, file };
 	}
 	get(path) {
 		return this.strage[path];
