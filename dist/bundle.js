@@ -804,7 +804,7 @@ s._configure=function(t){a=t}},
 /* unused harmony export te */
 /* unused harmony export td */
 /* harmony export (binding) */e.d(i,"a",(function(){return r}));
-/* harmony import */var n=e(1);const a=new TextEncoder("utf-8");new TextDecoder("utf-8");class r{static async sha256(t,i=1,e="base64"){return await r.d(t,"SHA-256",i,e)}static async sha384(t,i=1,e="base64"){return await r.d(t,"SHA-384",i,e)}static async sha512(t,i=1,e="base64"){return await r.d(t,"SHA-512",i,e)}static async sha1(t,i=1,e="base64"){return await r.d(t,"SHA-1",i,e)}static async d(t,i="SHA-256",e=1,r){let o=a.encode(t);for(let t=0;t<e;t++)o=await window.crypto.subtle.digest(i,o);return"base64"===r?n.a.aToB64(o):"base64url"===r?n.a.aToB64u(o):n.a.aToHex(o)}}
+/* harmony import */var n=e(1);const a=new TextEncoder("utf-8");new TextDecoder("utf-8");class r{static async sha256(t,i=1,e="base64"){return await r.d(t,"SHA-256",i,e)}static async sha384(t,i=1,e="base64"){return await r.d(t,"SHA-384",i,e)}static async sha512(t,i=1,e="base64"){return await r.d(t,"SHA-512",i,e)}static async sha1(t,i=1,e="base64"){return await r.d(t,"SHA-1",i,e)}static async d(t,i="SHA-256",e=1,r){let o=a.encode(t),l=null;for(let t=0;t<e;t++)l=await window.crypto.subtle.digest(i,l||o);return console.log(l),"base64"===r?n.a.aToB64(l):"base64url"===r?n.a.aToB64u(l):n.a.aToHex(l)}}
 /***/},
 /* 12 */
 /***/function(t,i,e){"use strict";

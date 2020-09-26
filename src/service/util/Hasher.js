@@ -15,10 +15,12 @@ export class Hasher {
 		return await Hasher.d(m, 'SHA-1', sc, type);
 	}
 	static async d(m, a = 'SHA-256', sc = 1, type) {
-		let r = te.encode(m);
+		let s = te.encode(m);
+		let r = null;
 		for (let i = 0; i < sc; i++) {
-			r = await window.crypto.subtle.digest(a, r);
+			r = await window.crypto.subtle.digest(a, r ? r : s);
 		}
+		console.log(r);
 		return type === 'base64' ? Base64Util.aToB64(r) : type === 'base64url' ? Base64Util.aToB64u(r) : Base64Util.aToHex(r);
 	}
 }
