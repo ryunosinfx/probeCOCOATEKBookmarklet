@@ -7,7 +7,6 @@ export class ListBuilder {
 		const keylist = [];
 		let index = 0;
 		for (let row of list) {
-			index++;
 			const path = row.url;
 			const file = row.file;
 			const created = row.reated;
@@ -21,7 +20,10 @@ export class ListBuilder {
 		}
 		keylist.sort();
 		for (let key of keylist) {
-			retList.push(map[key]);
+			index++;
+			const row = map[key];
+			row.index = index;
+			retList.push(row);
 		}
 		return retList;
 	}
