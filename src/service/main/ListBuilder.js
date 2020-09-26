@@ -9,7 +9,7 @@ export class ListBuilder {
 		for (let row of list) {
 			const path = row.url;
 			const file = row.file;
-			const created = row.created;
+			const created = TimeUtil.unixTimeToDateFormat(row.created * 1000);
 			const hex = row.hex;
 			const start = TimeUtil.unixTimeToDateFormat(file.startTimestamp * 1000);
 			const end = TimeUtil.unixTimeToDateFormat(file.endTimestamp * 1000);
