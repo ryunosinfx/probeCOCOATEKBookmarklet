@@ -2,7 +2,7 @@
   <div id="main" class="v-application">
     <h1>covid19radar zip.file link</h1>
     <p v-on:click="test">click and download!</p>
-    <table>
+    <table class="test">
       <thead>
         <th>No.</th>
         <th>START</th>
@@ -91,5 +91,8 @@ p {
   cursor: pointer;
   color: blue;
   text-decoration: underline;
+}
+table.test {
+  background-color: burlywood;
 }
 </style>
