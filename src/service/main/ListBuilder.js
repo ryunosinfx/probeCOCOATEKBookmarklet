@@ -19,9 +19,22 @@ export class ListBuilder {
 			map[key] = { path, created, hex, start, end, count, index };
 		}
 		keylist.sort();
+		let lastStart = null;
+		let lastEnd = null;
 		for (let key of keylist) {
 			index++;
 			const row = map[key];
+			if (lastStart === row.start) {
+				row.start = '';
+			} else {
+				lastStart = row.start;
+			}
+			if (lastEnd === row.end) {
+				row.end = '';
+			} else {
+				lastEnd = row.end;
+			}
+
 			row.index = index;
 			retList.push(row);
 		}
