@@ -4,12 +4,14 @@ import { FileDLHelper } from '../util/FileDLHelper';
 import { ZipDecoder } from '../util/ZipDecoder';
 import { ExporsFileDecoder } from './ExporsFileDecoder';
 import { fileListjson } from '../constants/Constants';
+import { ListBuilder } from './ListBuilder';
 const v = V.gi();
 export class MainLogic {
 	constructor() {
 		PostMessager.init();
 		this.strage = {};
 		this.ExporsFileDecoder = new ExporsFileDecoder();
+		this.ListBuilder = new ListBuilder();
 	}
 	async getList() {
 		await this.ExporsFileDecoder.init;
@@ -32,6 +34,9 @@ export class MainLogic {
 			console.error(e);
 		}
 		return obj.list;
+	}
+	convert(list) {
+		return this.ListBuilder.build(list);
 	}
 	async getZip(row) {
 		const blob = await PostMessager.postToParent({ path: row.url });

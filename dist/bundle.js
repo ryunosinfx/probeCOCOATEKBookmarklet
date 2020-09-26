@@ -9044,7 +9044,7 @@ r.get=function(t){return r[t]||null}},
 /* harmony import */var n=e(12),a=e.n(n)()(1);
 /* harmony import */
 // Module
-a.push([t.i,"\np {\n\tfont-size: 2em;\n\ttext-align: center;\n}\n.zipdllink {\n\tcursor: pointer;\n\tcolor: blue;\n\ttext-decoration: underline;\n}\n","",{version:3,sources:["src/Main.vue"],names:[],mappings:";AAoDA;CACA,cAAA;CACA,kBAAA;AACA;AACA;CACA,eAAA;CACA,WAAA;CACA,0BAAA;AACA",file:"Main.vue",sourcesContent:['<template>\n\t<div id="main" class="v-application">\n\t\t<h1>covid19radar zip.file link</h1>\n\t\t<p v-on:click="test">click and download!</p>\n\t\t<ul>\n\t\t\t<li v-for="item in loadedData.list" :key="item.url">\n\t\t\t\tcreated:{{ new Date(item.created).toISOString() }}/{{ item.hex }} /{{ JSON.stringify(item.file) }}\n\t\t\t\t<button class="zipdllink" v-on:click="dl(item.url)">{{ item.url }} DL</button>\n\t\t\t</li>\n\t\t</ul>\n\t\t<a id="dlLinkAncker"></a>\n\t</div>\n</template>\n\n<script>\nimport { MainLogic } from \'./service/main/MainLogic\';\nexport default {\n\tel: \'#main\',\n\tname: \'main\',\n\tcomponents: {},\n\tdata() {\n\t\treturn {\n\t\t\tgreeting: \'Hello\',\n\t\t\tloadedData: { list: [] },\n\t\t};\n\t},\n\tcreated() {\n\t\tthis.main = new MainLogic();\n\t},\n\tasync mounted() {\n\t\tconst list = await this.main.getList();\n\t\tfor (let row of list) {\n\t\t\tconst data = this.main.get(row.url);\n\t\t\trow.file = row.file;\n\t\t\trow.hex = row.hex;\n\t\t}\n\t\tconsole.log(\'mounted list:\' + typeof list);\n\t\tthis.loadedData.list = list;\n\t},\n\tmethods: {\n\t\tdl(url) {\n\t\t\tconsole.log(\'CCCCCCCCCCCCCCCCCCCCCCCurl:\' + url);\n\t\t\tthis.main.dl(url);\n\t\t},\n\t\ttest(e) {\n\t\t\talert(\'e:\' + e);\n\t\t},\n\t},\n};\n<\/script>\n\n<style>\np {\n\tfont-size: 2em;\n\ttext-align: center;\n}\n.zipdllink {\n\tcursor: pointer;\n\tcolor: blue;\n\ttext-decoration: underline;\n}\n</style>\n']}]),
+a.push([t.i,"\np {\n\tfont-size: 2em;\n\ttext-align: center;\n}\n.zipdllink {\n\tcursor: pointer;\n\tcolor: blue;\n\ttext-decoration: underline;\n}\n","",{version:3,sources:["src/Main.vue"],names:[],mappings:";AA6EA;CACA,cAAA;CACA,kBAAA;AACA;AACA;CACA,eAAA;CACA,WAAA;CACA,0BAAA;AACA",file:"Main.vue",sourcesContent:['<template>\n\t<div id="main" class="v-application">\n\t\t<h1>covid19radar zip.file link</h1>\n\t\t<p v-on:click="test">click and download!</p>\n\t\t<table>\n\t\t\t<thead>\n\t\t\t\t<th>index</th>\n\t\t\t\t<th>START</th>\n\t\t\t\t<th>END</th>\n\t\t\t\t<th>hash</th>\n\t\t\t\t<th>Count</th>\n\t\t\t\t<th>file</th>\n\t\t\t\t<th>created</th>\n\t\t\t</thead>\n\t\t\t<tbody>\n\t\t\t\t<tr v-for="item in loadedData.tlist" :key="item.path">\n\t\t\t\t\t<td>item.index</td>\n\t\t\t\t\t<td>item.start</td>\n\t\t\t\t\t<td>item.end</td>\n\t\t\t\t\t<td>item.hex</td>\n\t\t\t\t\t<td>item.count</td>\n\t\t\t\t\t<td>item.path</td>\n\t\t\t\t\t<td>item.created</td>\n\t\t\t\t</tr>\n\t\t\t</tbody>\n\t\t</table>\n\t\t<ul>\n\t\t\t<li v-for="item in loadedData.list" :key="item.url">\n\t\t\t\tcreated:{{ new Date(item.created).toISOString() }}/{{ item.hex }} /{{ JSON.stringify(item.file) }}\n\t\t\t\t<button class="zipdllink" v-on:click="dl(item.url)">{{ item.url }} DL</button>\n\t\t\t</li>\n\t\t</ul>\n\t\t<a id="dlLinkAncker"></a>\n\t</div>\n</template>\n\n<script>\n// retList.push({ path, created, hex, start, end, count, index });\nimport { MainLogic } from \'./service/main/MainLogic\';\nexport default {\n\tel: \'#main\',\n\tname: \'main\',\n\tcomponents: {},\n\tdata() {\n\t\treturn {\n\t\t\tgreeting: \'Hello\',\n\t\t\tloadedData: { list: [] },\n\t\t};\n\t},\n\tcreated() {\n\t\tthis.main = new MainLogic();\n\t},\n\tasync mounted() {\n\t\tconst list = await this.main.getList();\n\t\tfor (let row of list) {\n\t\t\tconst data = this.main.get(row.url);\n\t\t\trow.file = row.file;\n\t\t\trow.hex = row.hex;\n\t\t}\n\n\t\tthis.loadedData.tlist = this.main.convert(list);\n\t\tconsole.log(\'mounted list:\' + typeof list);\n\t\tthis.loadedData.list = list;\n\t},\n\tmethods: {\n\t\tdl(url) {\n\t\t\tconsole.log(\'CCCCCCCCCCCCCCCCCCCCCCCurl:\' + url);\n\t\t\tthis.main.dl(url);\n\t\t},\n\t\ttest(e) {\n\t\t\talert(\'e:\' + e);\n\t\t},\n\t},\n};\n<\/script>\n\n<style>\np {\n\tfont-size: 2em;\n\ttext-align: center;\n}\n.zipdllink {\n\tcursor: pointer;\n\tcolor: blue;\n\ttext-decoration: underline;\n}\n</style>\n']}]),
 // Exports
 /* harmony default export */i.default=a},
 /* 79 */
@@ -9093,7 +9093,7 @@ n.default.use(r.a);
 // CONCATENATED MODULE: ./src/BookmarkletBasePage.js
 const s=l.a.gi();
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/Main.vue?vue&type=template&id=3ffae6b2&
-var A=function(){var t=this,i=t.$createElement,e=t._self._c||i;return e("div",{staticClass:"v-application",attrs:{id:"main"}},[e("h1",[t._v("covid19radar zip.file link")]),t._v(" "),e("p",{on:{click:t.test}},[t._v("click and download!")]),t._v(" "),e("ul",t._l(t.loadedData.list,(function(i){return e("li",{key:i.url},[t._v("\n\t\t\tcreated:"+t._s(new Date(i.created).toISOString())+"/"+t._s(i.hex)+" /"+t._s(JSON.stringify(i.file))+"\n\t\t\t"),e("button",{staticClass:"zipdllink",on:{click:function(e){return t.dl(i.url)}}},[t._v(t._s(i.url)+" DL")])])})),0),t._v(" "),e("a",{attrs:{id:"dlLinkAncker"}})])};A._withStripped=1;
+var A=function(){var t=this,i=t.$createElement,e=t._self._c||i;return e("div",{staticClass:"v-application",attrs:{id:"main"}},[e("h1",[t._v("covid19radar zip.file link")]),t._v(" "),e("p",{on:{click:t.test}},[t._v("click and download!")]),t._v(" "),e("table",[t._m(0),t._v(" "),e("tbody",t._l(t.loadedData.tlist,(function(i){return e("tr",{key:i.path},[e("td",[t._v("item.index")]),t._v(" "),e("td",[t._v("item.start")]),t._v(" "),e("td",[t._v("item.end")]),t._v(" "),e("td",[t._v("item.hex")]),t._v(" "),e("td",[t._v("item.count")]),t._v(" "),e("td",[t._v("item.path")]),t._v(" "),e("td",[t._v("item.created")])])})),0)]),t._v(" "),e("ul",t._l(t.loadedData.list,(function(i){return e("li",{key:i.url},[t._v("\n\t\t\tcreated:"+t._s(new Date(i.created).toISOString())+"/"+t._s(i.hex)+" /"+t._s(JSON.stringify(i.file))+"\n\t\t\t"),e("button",{staticClass:"zipdllink",on:{click:function(e){return t.dl(i.url)}}},[t._v(t._s(i.url)+" DL")])])})),0),t._v(" "),e("a",{attrs:{id:"dlLinkAncker"}})])};A._withStripped=1;
 // CONCATENATED MODULE: ./src/Main.vue?vue&type=template&id=3ffae6b2&
 // EXTERNAL MODULE: ./src/service/util/PostMessager.js
 var c=e(5);
@@ -9114,8 +9114,12 @@ const i=t.slice(16),e=f.root.lookupType("TemporaryExposureKeyExport");try{consol
 t.keyData=t.keyData&&"string"==typeof t.keyData?t.keyData:d.a.aToB64u(t.keyData);return n}catch(t){console.warn(t),C.a.util.ProtocolError}}static loadProto(){return new Promise(t=>{C.a.load("dist/vendor/TemporaryExposureKeyExport.proto",(i,e)=>{if(i)throw i;t(e)})})}}
 // EXTERNAL MODULE: ./src/service/constants/Constants.js
 var x=e(17);
+// CONCATENATED MODULE: ./src/service/util/TimeUtil.js
+const B=/yyyy/,b=/MM/,y=/dd/,_=/hh/,w=/mm/,k=/ss/;class S{static unixTimeToDateFormat(t,i="yyyy-MM-dd hh:mm:ss"){const e=new Date(t),n=e.getFullYear(),a=("0"+(1*e.getMonth()+1)).slice(-2),r=("0"+e.getDate()).slice(-2),o=("0"+e.getHours()).slice(-2),l=("0"+e.getMinutes()).slice(-2),p=("0"+e.getSeconds()).slice(-2);return i.replace(B,n).replace(b,a).replace(y,r).replace(_,o).replace(w,l).replace(k,p)}static getNowUnixtime(){return(new Date).getTime()}static getNowUnixTimeAtUTC(){return(new Date).getTime()}static random(){const t=Math.random()*(Date.now()+"").substring(9)*1;return Math.ceil(t)}static toDate(t){return new Date(t)}}
+// CONCATENATED MODULE: ./src/service/main/ListBuilder.js
+class V{constructor(){}build(t){const i=[];let e=0;for(let n of t){e++;const t=n.url,a=n.file,r=crow.reated,o=crow.hex,l=S.unixTimeToDateFormat(1e3*a.startTimestamp),p=S.unixTimeToDateFormat(1e3*a.endTimestamp),s=a.keys.length;i.push({path:t,created:r,hex:o,start:l,end:p,count:s,index:e})}return i}}
 // CONCATENATED MODULE: ./src/service/main/MainLogic.js
-l.a.gi();class B{constructor(){c.a.init(),this.strage={},this.ExporsFileDecoder=new h}async getList(){await this.ExporsFileDecoder.init,console.log("MainLogic getList START");const t=await c.a.postToParent({path:x.a,isText:1});console.log(t);const i=t,e={};try{e.list=JSON.parse(i)}catch(t){}console.log("MainLogic getList END");try{const t=[];for(let i of e.list)t.push(this.getZip(i));await Promise.all(t)}catch(t){console.error(t)}return e.list}async getZip(t){const i=await c.a.postToParent({path:t.url}),e=await class{static async decode(t){console.log("ZipDecoder decode -0-dURI:"+t);const i=d.a.dataURI2bs(t),e=d.a.bs2u8a(i),n={};console.log("ZipDecoder decode -A-"),console.log(e);try{console.log("ZipDecoder decode -B-");const t=new u.Unzip(e),i=t.getFilenames();console.log("ZipDecoder decode -C-"),console.log(i);for(let e of i)try{console.log("ZipDecoder decode -C1-filePath:"+e);const i=d.a.u8a2bs(t.decompress(e));console.log("ZipDecoder decode -C2-filePath:"+e),console.log(typeof i),console.log(i),console.log("ZipDecoder decode -C3-filePath:"+e);const a=await v.a.sha256(i,1,"hex");console.log("ZipDecoder decode -C5-hex:"+a);const r=d.a.bs2u8a(i);console.log("ZipDecoder decode -C6-filePath:"+e),console.log(r),n[e]={u8a:r,hex:a}}catch(t){console.warn(e),console.warn(t),console.warn(t.message)}console.log("ZipDecoder decode -D-")}catch(t){console.warn(t),console.warn(t.message)}return console.log("ZipDecoder retObj"),console.log(n),console.log("ZipDecoder decode -E-"),n}}.decode(i),n=e["export.bin"];console.log("----decoded---getZip bin:"+n),console.log(e);const a=n?n.hex:null,r=n?await this.ExporsFileDecoder.decode(n.u8a):{};t.file=r,t.hex=a,this.strage[t.url]=i}get(t){return this.strage[t]}dl(t){const i=t.split("/"),e=i[i.length-1],n=this.strage[t];console.log("MainLogic getList blob:"+n),n&&(console.log("MainLogic getList fn:"+e),class{static dl(t,i,e="application/octetstream",n){const a=m.gid("dlLinkAncker");a.download=t,a.href=n?i:URL.createObjectURL(i,{type:e}),a.click(),setTimeout(()=>{URL.revokeObjectURL(a.href)},1e3)}}.dl(e,n,void 0,1))}}
+l.a.gi();class O{constructor(){c.a.init(),this.strage={},this.ExporsFileDecoder=new h,this.ListBuilder=new V}async getList(){await this.ExporsFileDecoder.init,console.log("MainLogic getList START");const t=await c.a.postToParent({path:x.a,isText:1});console.log(t);const i=t,e={};try{e.list=JSON.parse(i)}catch(t){}console.log("MainLogic getList END");try{const t=[];for(let i of e.list)t.push(this.getZip(i));await Promise.all(t)}catch(t){console.error(t)}return e.list}convert(t){return this.ListBuilder.build(t)}async getZip(t){const i=await c.a.postToParent({path:t.url}),e=await class{static async decode(t){console.log("ZipDecoder decode -0-dURI:"+t);const i=d.a.dataURI2bs(t),e=d.a.bs2u8a(i),n={};console.log("ZipDecoder decode -A-"),console.log(e);try{console.log("ZipDecoder decode -B-");const t=new u.Unzip(e),i=t.getFilenames();console.log("ZipDecoder decode -C-"),console.log(i);for(let e of i)try{console.log("ZipDecoder decode -C1-filePath:"+e);const i=d.a.u8a2bs(t.decompress(e));console.log("ZipDecoder decode -C2-filePath:"+e),console.log(typeof i),console.log(i),console.log("ZipDecoder decode -C3-filePath:"+e);const a=await v.a.sha256(i,1,"hex").toUpperCase();console.log("ZipDecoder decode -C5-hex:"+a);const r=d.a.bs2u8a(i);console.log("ZipDecoder decode -C6-filePath:"+e),console.log(r),n[e]={u8a:r,hex:a}}catch(t){console.warn(e),console.warn(t),console.warn(t.message)}console.log("ZipDecoder decode -D-")}catch(t){console.warn(t),console.warn(t.message)}return console.log("ZipDecoder retObj"),console.log(n),console.log("ZipDecoder decode -E-"),n}}.decode(i),n=e["export.bin"];console.log("----decoded---getZip bin:"+n),console.log(e);const a=n?n.hex:null,r=n?await this.ExporsFileDecoder.decode(n.u8a):{};t.file=r,t.hex=a,this.strage[t.url]=i}get(t){return this.strage[t]}dl(t){const i=t.split("/"),e=i[i.length-1],n=this.strage[t];console.log("MainLogic getList blob:"+n),n&&(console.log("MainLogic getList fn:"+e),class{static dl(t,i,e="application/octetstream",n){const a=m.gid("dlLinkAncker");a.download=t,a.href=n?i:URL.createObjectURL(i,{type:e}),a.click(),setTimeout(()=>{URL.revokeObjectURL(a.href)},1e3)}}.dl(e,n,void 0,1))}}
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/Main.vue?vue&type=script&lang=js&
 
 
@@ -9131,12 +9135,35 @@ l.a.gi();class B{constructor(){c.a.init(),this.strage={},this.ExporsFileDecoder=
 
 
 
-/* harmony default export */var b={el:"#main",name:"main",components:{},data:()=>({greeting:"Hello",loadedData:{list:[]}}),created(){this.main=new B},async mounted(){const t=await this.main.getList();for(let i of t){this.main.get(i.url);i.file=i.file,i.hex=i.hex}console.log("mounted list:"+typeof t),this.loadedData.list=t},methods:{dl(t){console.log("CCCCCCCCCCCCCCCCCCCCCCCurl:"+t),this.main.dl(t)},test(t){alert("e:"+t)}}};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// retList.push({ path, created, hex, start, end, count, index });
+/* harmony default export */var D={el:"#main",name:"main",components:{},data:()=>({greeting:"Hello",loadedData:{list:[]}}),created(){this.main=new O},async mounted(){const t=await this.main.getList();for(let i of t){this.main.get(i.url);i.file=i.file,i.hex=i.hex}this.loadedData.tlist=this.main.convert(t),console.log("mounted list:"+typeof t),this.loadedData.list=t},methods:{dl(t){console.log("CCCCCCCCCCCCCCCCCCCCCCCurl:"+t),this.main.dl(t)},test(t){alert("e:"+t)}}};
 // CONCATENATED MODULE: ./src/Main.vue?vue&type=script&lang=js&
 /* harmony default export */e(77);
 // CONCATENATED MODULE: ./src/Main.vue
 /* normalize component */
-var y=
+var T=
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
 /* globals __VUE_SSR_CONTEXT__ */
 // IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
@@ -9172,16 +9199,16 @@ s._injectStyles=p;
 // register for functional component in vue file
 var A=s.render;s.render=function(t,i){return p.call(i),A(t,i)}}else{
 // inject component registration as beforeCreate hook
-var c=s.beforeCreate;s.beforeCreate=c?[].concat(c,p):[p]}return{exports:t,options:s}}(b,A,[],0,null,null,null)
-/* hot reload */;y.options.__file="src/Main.vue"
-/* harmony default export */;var _=y.exports;
+var c=s.beforeCreate;s.beforeCreate=c?[].concat(c,p):[p]}return{exports:t,options:s}}(D,A,[function(){var t=this,i=t.$createElement,e=t._self._c||i;return e("thead",[e("th",[t._v("index")]),t._v(" "),e("th",[t._v("START")]),t._v(" "),e("th",[t._v("END")]),t._v(" "),e("th",[t._v("hash")]),t._v(" "),e("th",[t._v("Count")]),t._v(" "),e("th",[t._v("file")]),t._v(" "),e("th",[t._v("created")])])}],0,null,null,null)
+/* hot reload */;T.options.__file="src/Main.vue"
+/* harmony default export */;var j=T.exports;
 // CONCATENATED MODULE: ./src/main.js
 (async()=>{const t=window.parent;// alert(wp === window);
 if(console.log("wp"),console.log(t),!t||t===window)return void await class{static async main(){const t=location.href,i=await p.a.l(t+"dist/bookmarklet.js",void 0,1);s.a(s.b,s.h1("bookmarklet !"));const e=s.an("bookmarkletAncker");s.a(s.b,e),e.href=
 // CONCATENATED MODULE: ./src/service/util/BookmarkletBuilder.js
 class{static build(t){return`javascript:(()=>{${t.split("\t").join("").split("\n").join("")}})()`}}.build(i)}}.main();const i="app"+Date.now(),e=globalThis.document,a=e.getElementsByTagName("body")[0];for(let t of a.children)t.style.display="none";if(!e.getElementById(i)){const t=e.createElement("div");t.setAttribute("id",i),a.appendChild(t)}new n.default({el:"#"+i,
 // アプリをマウントする要素(セレクタで指定)
-components:{App:_},
+components:{App:j},
 // Appというコンポーネントを使うよ、という宣言
 template:"<app/>",
 // el(今回は#app)の中に表示する内容
