@@ -14,13 +14,13 @@
 			</thead>
 			<tbody>
 				<tr v-for="item in loadedData.tlist" :key="item.path">
-					<td>item.index</td>
-					<td>item.start</td>
-					<td>item.end</td>
-					<td>item.hex</td>
-					<td>item.count</td>
-					<td>item.path</td>
-					<td>item.created</td>
+					<td>{{ item.index }}</td>
+					<td>{{ item.start }}</td>
+					<td>{{ item.end }}</td>
+					<td>{{ item.hex }}</td>
+					<td>{{ item.count }}</td>
+					<td>{{ item.path }}</td>
+					<td>{{ item.created }}</td>
 				</tr>
 			</tbody>
 		</table>
