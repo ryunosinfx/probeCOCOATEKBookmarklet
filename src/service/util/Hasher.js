@@ -20,7 +20,6 @@ export class Hasher {
 		for (let i = 0; i < sc; i++) {
 			r = await window.crypto.subtle.digest(a, r ? r : s);
 		}
-		console.log(r);
 		return type === 'base64' ? Base64Util.aToB64(r) : type === 'base64url' ? Base64Util.aToB64u(r) : Base64Util.aToHex(r);
 	}
 }
