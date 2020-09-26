@@ -9,12 +9,12 @@ export class ListBuilder {
 		for (let row of list) {
 			const path = row.url;
 			const file = row.file;
-			const created = row.reated;
+			const created = row.created;
 			const hex = row.hex;
 			const start = TimeUtil.unixTimeToDateFormat(file.startTimestamp * 1000);
 			const end = TimeUtil.unixTimeToDateFormat(file.endTimestamp * 1000);
 			const count = file.keys.length;
-			const key = JSON.stringify([start, end, hex]);
+			const key = JSON.stringify([start, end, created, hex]);
 			keylist.push(key);
 			map[key] = { path, created, hex, start, end, count, index };
 		}
