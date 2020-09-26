@@ -1,44 +1,49 @@
 <template>
   <div id="main" class="v-application">
-    <h1>covid19radar zip.file link</h1>
-    <p v-on:click="test">click and download!</p>
-    <table class="test">
-      <thead>
-        <th>No.</th>
-        <th>START</th>
-        <th>END</th>
-        <th>hash</th>
-        <th>TEK</th>
-        <th>url</th>
-        <th>created</th>
-      </thead>
-      <tbody>
-        <tr v-for="item in loadedData.tlist" :key="item.path">
-          <td>{{ item.index }}</td>
-          <td>{{ item.start }}</td>
-          <td>{{ item.end }}</td>
-          <td>{{ item.hex }}</td>
-          <td>{{ item.count }}</td>
-          <td>
-            <button class="zipdllink" v-on:click="dl(item.path)">
-              {{ item.fileName }} DL
+    <v-app>
+      <v-main>
+        <v-app-bar app>covid19radar zip.file link </v-app-bar>
+        <p v-on:click="test">click and download!</p>
+        <table class="test">
+          <thead>
+            <th>No.</th>
+            <th>START</th>
+            <th>END</th>
+            <th>hash</th>
+            <th>TEK</th>
+            <th>url</th>
+            <th>created</th>
+          </thead>
+          <tbody>
+            <tr v-for="item in loadedData.tlist" :key="item.path">
+              <td>{{ item.index }}</td>
+              <td>{{ item.start }}</td>
+              <td>{{ item.end }}</td>
+              <td>{{ item.hex }}</td>
+              <td>{{ item.count }}</td>
+              <td>
+                <button class="zipdllink" v-on:click="dl(item.path)">
+                  {{ item.fileName }} DL
+                </button>
+              </td>
+              <td>{{ item.created }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <ul>
+          <li v-for="item in loadedData.list" :key="item.url">
+            created:{{ new Date(item.created).toISOString() }}/{{
+              item.hex
+            }}
+            /{{ JSON.stringify(item.file) }}
+            <button class="zipdllink" v-on:click="dl(item.url)">
+              {{ item.url }} DL
             </button>
-          </td>
-          <td>{{ item.created }}</td>
-        </tr>
-      </tbody>
-    </table>
-    <ul>
-      <li v-for="item in loadedData.list" :key="item.url">
-        created:{{ new Date(item.created).toISOString() }}/{{ item.hex }} /{{
-          JSON.stringify(item.file)
-        }}
-        <button class="zipdllink" v-on:click="dl(item.url)">
-          {{ item.url }} DL
-        </button>
-      </li>
-    </ul>
-    <a id="dlLinkAncker"></a>
+          </li>
+        </ul>
+        <a id="dlLinkAncker"></a>
+      </v-main>
+    </v-app>
   </div>
 </template>
 
