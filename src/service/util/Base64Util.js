@@ -60,10 +60,10 @@ export class Base64Util {
 		return btoa(Base64Util.ab2bs(ab));
 	}
 	static aToB64u(ai) {
-		console.log('typeof ai:' + typeof ai);
-		console.log(ai);
+		// console.log('typeof ai:' + typeof ai);
+		// console.log(ai);
 		const b = Base64Util.aToB64(ai);
-		console.log('aToB64u b:' + b);
+		// console.log('aToB64u b:' + b);
 		return Base64Util.toB64u(b);
 	}
 	static b64toHex(b64) {
@@ -78,14 +78,13 @@ export class Base64Util {
 	static aToHex(ai) {
 		const u8a = ai.buffer ? new Uint8Array(ai.buffer) : new Uint8Array(ai);
 		const rl = [];
-
-		console.log(u8a);
+		// console.log(u8a);
 		for (let i of u8a) {
 			const a = i.toString(16);
 			rl.push(('00' + a).slice(-2));
 		}
-		console.log(rl);
-		console.log(rl.length + '/' + u8a.length);
+		// console.log(rl);
+		// console.log(rl.length + '/' + u8a.length);
 		return rl.join('');
 	}
 	static bs2u8a(bs) {
@@ -98,14 +97,14 @@ export class Base64Util {
 	}
 	static s2u(s) {
 		const r = [];
-		console.log(s);
+		// console.log(s);
 		const sr = s.match(/\\u.{4}/gi);
-		console.log(sr);
+		// console.log(sr);
 		if (!sr) {
 			return '';
 		}
 		const l = sr.length;
-		console.log(sr);
+		// console.log(sr);
 		for (let i = 0; i < l; i++) {
 			r.push(String.fromCharCode(sr[i].replace('\\u', '0x')));
 		}

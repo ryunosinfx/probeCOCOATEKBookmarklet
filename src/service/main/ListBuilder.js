@@ -16,7 +16,7 @@ export class ListBuilder {
 			const end = TimeUtil.unixTimeToDateFormat(file.endTimestamp * 1000);
 			const count = file.keys.length;
 			const key = JSON.stringify([start, end, hex]);
-			keylist.puhs(key);
+			keylist.push(key);
 			map[key] = { path, created, hex, start, end, count, index };
 		}
 		keylist.sort();
