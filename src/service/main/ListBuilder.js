@@ -8,8 +8,8 @@ export class ListBuilder {
 			index++;
 			const path = row.url;
 			const file = row.file;
-			const created = crow.reated;
-			const hex = crow.hex;
+			const created = row.reated;
+			const hex = row.hex;
 			const start = TimeUtil.unixTimeToDateFormat(file.startTimestamp * 1000);
 			const end = TimeUtil.unixTimeToDateFormat(file.endTimestamp * 1000);
 			const count = file.keys.length;
