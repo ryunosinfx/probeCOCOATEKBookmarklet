@@ -3,6 +3,8 @@ export class ListBuilder {
 	constructor() {}
 	build(list) {
 		const retList = [];
+		const map = {};
+		const keylist = [];
 		let index = 0;
 		for (let row of list) {
 			index++;
@@ -13,7 +15,13 @@ export class ListBuilder {
 			const start = TimeUtil.unixTimeToDateFormat(file.startTimestamp * 1000);
 			const end = TimeUtil.unixTimeToDateFormat(file.endTimestamp * 1000);
 			const count = file.keys.length;
-			retList.push({ path, created, hex, start, end, count, index });
+			const key = JSON.stringify([start, end, hex]);
+			keylist.puhs(key);
+			map[key] = { path, created, hex, start, end, count, index };
+		}
+		keylist.sort();
+		for (let key of keylist) {
+			retList.push(map[key]);
 		}
 		return retList;
 	}
