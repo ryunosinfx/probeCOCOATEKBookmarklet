@@ -19,7 +19,11 @@
           <td>{{ item.end }}</td>
           <td>{{ item.hex }}</td>
           <td>{{ item.count }}</td>
-          <td>{{ item.path }}</td>
+          <td>
+            <button class="zipdllink" v-on:click="dl(item.path)">
+              {{ item.fileName }} DL
+            </button>
+          </td>
           <td>{{ item.created }}</td>
         </tr>
       </tbody>

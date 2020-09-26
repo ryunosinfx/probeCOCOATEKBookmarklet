@@ -8,6 +8,8 @@ export class ListBuilder {
 		let index = 0;
 		for (let row of list) {
 			const path = row.url;
+			const p = row.url.split('/');
+			const fileName = p[p.length - 1];
 			const file = row.file;
 			const created = TimeUtil.unixTimeToDateFormat(row.created);
 			const hex = row.hex;
@@ -16,7 +18,7 @@ export class ListBuilder {
 			const count = file.keys.length;
 			const key = JSON.stringify([start, end, created, hex]);
 			keylist.push(key);
-			map[key] = { path, created, hex, start, end, count, index };
+			map[key] = { path, created, hex, start, end, count, index, fileName };
 		}
 		keylist.sort();
 		let lastStart = null;
