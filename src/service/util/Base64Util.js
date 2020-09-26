@@ -75,6 +75,14 @@ export class Base64Util {
 		}
 		return rl.join('');
 	}
+	static aToHex(ai) {
+		const u8a = ai.buffer ? new Uint8Array(ai.buffer) : new Uint8Array(ai);
+		const rl = [];
+		for (let i of u8a) {
+			rl.push(i.toString(16));
+		}
+		return rl.join('');
+	}
 	static bs2u8a(bs) {
 		const l = bs.length;
 		const a = new Uint8Array(new ArrayBuffer(l));
