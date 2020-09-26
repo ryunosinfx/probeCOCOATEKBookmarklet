@@ -25,7 +25,7 @@ export class ZipDecoder {
 					console.log(typeof bs);
 					console.log(bs);
 					console.log('ZipDecoder decode -C3-filePath:' + filePath);
-					const hex = await Hasher.sha256(bs, 1, 'hex').toUpperCase();
+					const hex = (await Hasher.sha256(bs, 1, 'hex')).toUpperCase();
 					console.log('ZipDecoder decode -C5-hex:' + hex);
 					const u8a = Base64Util.bs2u8a(bs);
 					console.log('ZipDecoder decode -C6-filePath:' + filePath);
