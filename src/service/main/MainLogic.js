@@ -35,8 +35,8 @@ export class MainLogic {
 		}
 		return obj.list;
 	}
-	convert(list) {
-		return this.ListBuilder.build(list);
+	convert(list, filterHashes) {
+		return this.ListBuilder.build(list, filterHashes);
 	}
 	async getZip(row) {
 		const blob = await PostMessager.postToParent({ path: row.url });

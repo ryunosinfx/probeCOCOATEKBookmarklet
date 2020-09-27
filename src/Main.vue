@@ -30,9 +30,15 @@
 			<v-tabs-items v-model="tab">
 				<v-tab-item>
 					<v-card flat class="d-block pa-2 deep-purple accent-4 white--text">
-						<v-textarea auto-grow="true" label="select Hash" clearable clear-icon="mdi-close-circle" v-model="hash"></v-textarea>
-						<v-btn class="" v-on:click="select">select</v-btn>
-						<v-btn class="" v-on:click="clear">clear</v-btn>
+						<v-row class="mb-6" no-gutters>
+							<v-col md="5">
+								<v-textarea auto-grow="true" label="select Hash" clearable clear-icon="mdi-close-circle" v-model="hash"></v-textarea>
+							</v-col>
+							<v-col md="1">
+								<v-btn class="" v-on:click="select">select</v-btn>
+								<v-btn class="" v-on:click="clear">clear</v-btn>
+							</v-col>
+						</v-row>
 						<table class="test">
 							<thead>
 								<th>No.</th>
@@ -124,12 +130,10 @@ export default {
 			alert('e:' + e);
 		},
 		select() {
-			alert('select!');
-			this.loadedData.tlist = this.main.convert(this.loadedData.list);
+			this.loadedData.tlist = this.main.convert(this.loadedData.list, this.hash);
 		},
 		clear() {
 			this.loadedData.tlist = this.main.convert(this.loadedData.list);
-			alert('clear!');
 		},
 	},
 };

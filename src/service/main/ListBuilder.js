@@ -1,7 +1,8 @@
 import { TimeUtil } from '../util/TimeUtil';
 export class ListBuilder {
 	constructor() {}
-	build(list) {
+	build(list, filterHash) {
+		const hashes = this.loadHash(filterHash);
 		const retList = [];
 		const map = {};
 		const keylist = [];
@@ -24,8 +25,12 @@ export class ListBuilder {
 		let lastStart = null;
 		let lastEnd = null;
 		for (let key of keylist) {
-			index++;
 			const row = map[key];
+			if (hashes.length > 0) {
+				if (!hashes.includes(row.hex)) {
+					continue;
+				}
+			}
 			if (lastStart === row.start) {
 				row.start = '';
 			} else {
@@ -36,10 +41,37 @@ export class ListBuilder {
 			} else {
 				lastEnd = row.end;
 			}
+			index++;
 
 			row.index = index;
 			retList.push(row);
 		}
 		return retList;
+	}
+	loadHash(filterHash) {
+		const hashes = [];
+		if (!filterHash) {
+			return hashes;
+		}
+		try {
+			const obj = JSON.parse(filterHash);
+			if (Array.isArray(obj)) {
+				for (let row of obj) {
+					if (Array.isArray(row.Files)) {
+						for (let file of row.Files) {
+							if (file.MatchCount * 1 > 0 && file.Hash) {
+								hashes.push(file.Hash);
+							}
+						}
+					} else if (row.hash && row.MatchCount * 1 > 0) {
+						hashes.push(row.Hash);
+					}
+				}
+			}
+		} catch (e) {
+			console.log(e);
+			return filterHash.split('\n');
+		}
+		return hashes;
 	}
 }
