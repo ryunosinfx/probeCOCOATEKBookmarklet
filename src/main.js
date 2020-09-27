@@ -24,9 +24,9 @@ import App from './Main';
 		body.appendChild(appDom);
 	}
 	new Vue({
-		el: '#' + targetId, // アプリをマウントする要素(セレクタで指定)
-		components: { App }, // Appというコンポーネントを使うよ、という宣言
-		template: '<app/>', // el(今回は#app)の中に表示する内容
+		el: '#' + targetId,
+		components: { App },
+		template: '<app/>',
 		vuetify,
 	});
 })();
