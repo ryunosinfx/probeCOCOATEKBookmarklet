@@ -40,7 +40,7 @@ export class V {
 				this.b.removeChild(c);
 			}
 			for (let c of this.b.children) {
-				b.removeChild(c);
+				this.b.removeChild(c);
 			}
 		}
 	}
