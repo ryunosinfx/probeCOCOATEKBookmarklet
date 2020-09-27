@@ -1,10 +1,9 @@
 <template>
   <v-app id="main" class="v-application">
-    <v-app-bar app>covid19radar zip.file link </v-app-bar>
+    <v-app-bar app> <h1>covid19radar zip.file link</h1></v-app-bar>
     <v-main>
-      <p v-on:click="test">click and download!</p>
       <table class="test">
-        <thead>
+        <thead class="d-block pa-2 deep-purple accent-4 white--text">
           <th>No.</th>
           <th>START</th>
           <th>END</th>
