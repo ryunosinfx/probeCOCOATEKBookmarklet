@@ -6,7 +6,7 @@ import App from './Main';
 (async () => {
 	const wp = window.parent;
 	console.log('wp');
-	console.log(wp);
+	// console.log(wp);
 	// alert(wp === window);
 	if (!wp || wp === window) {
 		await BookmarkletBasePage.main();
