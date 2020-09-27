@@ -1,5 +1,6 @@
 import { V } from './V';
 import { Hasher } from './Hasher';
+import { chiledOrigin } from '../constants/Constants';
 const v = V.gi();
 const f = { oM: async () => {}, oL: () => {}, i: null };
 const M = 'message';
@@ -90,7 +91,7 @@ export class PostMessager {
 			// console.log('postToChild b msg:' + msg);
 			console.log('PostMessager postToChild f.i');
 			console.log(f.i);
-			f.i.contentWindow.postMessage(msg, '*');
+			f.i.contentWindow.postMessage(msg, chiledOrigin);
 		}
 	}
 	static postToParent(msg) {
