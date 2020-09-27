@@ -1,6 +1,6 @@
 <template>
 	<v-app id="main" class="v-application">
-		<v-app-bar app> <h1>covid19radar zip.file link</h1></v-app-bar>
+		<v-app-bar app dark height="40"> <h1>covid19radar zip.file link</h1></v-app-bar>
 		<v-main>
 			<v-toolbar color="cyan" dark flat>
 				<v-app-bar-nav-icon></v-app-bar-nav-icon>
@@ -30,6 +30,9 @@
 			<v-tabs-items v-model="tab">
 				<v-tab-item>
 					<v-card flat class="d-block pa-2 deep-purple accent-4 white--text">
+						<v-textarea auto-grow="true" label="select Hash" clearable clear-icon="mdi-close-circle" v-model="hash"></v-textarea>
+						<v-btn class="" v-on:click="select">select</v-btn>
+						<v-btn class="" v-on:click="clear">clear</v-btn>
 						<table class="test">
 							<thead>
 								<th>No.</th>
@@ -72,6 +75,9 @@
 		<v-footer app>
 			<!-- -->
 		</v-footer>
+		<v-overlay :value="overlay">
+			<v-progress-circular indeterminate size="64"></v-progress-circular>
+		</v-overlay>
 	</v-app>
 </template>
 
@@ -88,12 +94,15 @@ export default {
 			loadedData: { list: [] },
 			tab: null,
 			items: ['list', 'detail'],
+			hash: null,
+			overlay: false,
 		};
 	},
 	created() {
 		this.main = new MainLogic();
 	},
 	async mounted() {
+		this.overlay = true;
 		const list = await this.main.getList();
 		for (let row of list) {
 			const data = this.main.get(row.url);
@@ -104,6 +113,7 @@ export default {
 		this.loadedData.tlist = this.main.convert(list);
 		console.log('mounted list:' + typeof list);
 		this.loadedData.list = list;
+		this.overlay = false;
 	},
 	methods: {
 		dl(url) {
@@ -112,6 +122,14 @@ export default {
 		},
 		test(e) {
 			alert('e:' + e);
+		},
+		select() {
+			alert('select!');
+			this.loadedData.tlist = this.main.convert(this.loadedData.list);
+		},
+		clear() {
+			this.loadedData.tlist = this.main.convert(this.loadedData.list);
+			alert('clear!');
 		},
 	},
 };

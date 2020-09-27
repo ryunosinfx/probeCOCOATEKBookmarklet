@@ -22,6 +22,9 @@ const opts = {
 			},
 		},
 	},
+	icons: {
+		iconfont: 'mdiSvg', // 'mdi' || 'mdiSvg' || 'md' || 'fa' || 'fa4' || 'faSvg'
+	},
 };
 console.log('opts:' + opts);
 export default new Vuetify(opts);
