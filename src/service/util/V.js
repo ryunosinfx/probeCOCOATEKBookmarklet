@@ -73,7 +73,11 @@ export class V {
 	}
 	re(e) {
 		const p = e.parent ? e.parent : this.d;
-		p.removeChild(e);
+		if (e.parent) {
+			p.removeChild(e);
+		} else {
+			e.remove();
+		}
 	}
 	tn(tag) {
 		return this.d.getElementsByTagName(tag)[0];
