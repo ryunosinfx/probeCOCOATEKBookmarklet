@@ -2,7 +2,7 @@
 
 A bookmarklet for probing COCOA TEK
 
-作成中
+ファイル取得＋ハッシュ値と表示が出来たところまで
 
 ## 使い方
 
