@@ -3,15 +3,13 @@
 		<v-app-bar app dark height="40"> <h1>covid19radar zip.file link</h1></v-app-bar>
 		<v-main>
 			<v-toolbar color="cyan" dark flat>
-				<template v-slot:extension>
-					<v-tabs v-model="tab" align-with-title>
-						<v-tabs-slider color="yellow"></v-tabs-slider>
+				<v-tabs v-model="tab" align-with-title>
+					<v-tabs-slider color="yellow"></v-tabs-slider>
 
-						<v-tab v-for="item in items" :key="item">
-							{{ item }}
-						</v-tab>
-					</v-tabs>
-				</template>
+					<v-tab v-for="item in items" :key="item">
+						{{ item }}
+					</v-tab>
+				</v-tabs>
 			</v-toolbar>
 			<v-tabs-items v-model="tab">
 				<v-tab-item>
@@ -116,10 +114,14 @@ export default {
 			alert('e:' + e);
 		},
 		select() {
+			this.overlay = true;
 			this.loadedData.tlist = this.main.convert(this.loadedData.list, this.hash);
+			this.overlay = false;
 		},
 		clear() {
+			this.overlay = true;
 			this.loadedData.tlist = this.main.convert(this.loadedData.list);
+			this.overlay = false;
 		},
 	},
 };
