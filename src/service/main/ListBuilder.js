@@ -70,7 +70,9 @@ export class ListBuilder {
 			}
 		} catch (e) {
 			console.log(e);
-			return filterHash.split('\n');
+			const hashes = filterHash.split('\n');
+			console.log(hashes);
+			return hashes;
 		}
 		return hashes;
 	}
