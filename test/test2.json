@@ -1,0 +1,15 @@
+[
+	{
+		"TimeStamp": "1999-12-31 23:59:59 +0900",
+		"Files": [
+			{
+				"hash": "0E790673FF2E90BA880653FE1C3990F17883D3A66D5B4ED0BA24F4598DC3B16C",
+				"RandomIDCount": 1,
+				"MatchCount": 1,
+				"AppBundleIdentifier": "jp.co.example",
+				"TimeStamp": "1999-12-31 23:59:59 +0900"
+			}
+		],
+		"AppBundleIdentifier": "jp.co.example"
+	}
+]
