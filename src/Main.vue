@@ -124,13 +124,10 @@ export default {
 			this.loadedData.tlist = this.main.convert(this.loadedData.list);
 			this.overlay = false;
 		},
-		fileup(event) {
+		fileup(file) {
 			this.overlay = true;
-			console.log('CCCCCCCCCCCCCCCCCCCCCCCevent:' + event);
-			console.log(event);
-			event.preventDefault();
-			const files = event.target.files;
-			const file = files[0];
+			console.log('CCCCCCCCCCCCCCCCCCCCCCCevent:' + file);
+			console.log(file);
 			const reader = new FileReader();
 			reader.addEventListener('load', (event) => {
 				this.hash = event.target.result;
