@@ -1,6 +1,6 @@
 <template>
 	<v-app id="main" class="v-application">
-		<v-app-bar app dark height="40"> <h1>covid19radar zip.file link</h1></v-app-bar>
+		<v-app-bar app dark height="40"> <h1>probeCOCOATEKBookmarklet:covid19radar zip.file links</h1></v-app-bar>
 		<v-main>
 			<v-toolbar color="cyan" dark flat>
 				<v-tabs v-model="tab" align-with-title>
