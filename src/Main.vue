@@ -134,7 +134,7 @@ export default {
 				this.loadedData.tlist = this.main.convert(this.loadedData.list, this.hash);
 				this.overlay = false;
 			});
-			reader.readAsDataURL(file);
+			reader.readAsText(file);
 		},
 	},
 };
