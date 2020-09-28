@@ -22,8 +22,8 @@
 								<v-file-input truncate-length="15" class="" v-on:change="fileup" label="ExportChecks.json File input">file</v-file-input>
 								<v-btn class="" v-on:click="select">select</v-btn>
 								<v-btn class="" v-on:click="clear">clear</v-btn>
-							</v-col> </v-row
-						>fileup
+							</v-col>
+						</v-row>
 						<table class="test">
 							<thead>
 								<th>No.</th>
