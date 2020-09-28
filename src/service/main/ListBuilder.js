@@ -67,7 +67,7 @@ export class ListBuilder {
 								hashes.push(file.Hash);
 							}
 						}
-					} else if (row.hash && row.MatchCount * 1 > 0) {
+					} else if (row.Hash && row.MatchCount * 1 > 0) {
 						hashes.push(row.Hash);
 					}
 				}
