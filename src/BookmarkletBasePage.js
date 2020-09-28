@@ -7,6 +7,7 @@ const v = V.gi();
 export class BookmarkletBasePage {
 	static async main() {
 		const url = location.href;
+		console.log('url:' + url);
 		const src = await F.l(`${url}dist/bookmarklet.js`, undefined, true);
 		v.b.style.padding = '2em';
 		v.a(v.b, v.h1('probeCOCOATEKBookmarklet !'));
