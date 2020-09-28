@@ -19,11 +19,11 @@
 								<v-textarea auto-grow="true" label="select Hash" clearable clear-icon="mdi-close-circle" v-model="hash"></v-textarea>
 							</v-col>
 							<v-col md="1">
-								<v-file-input truncate-length="15" class="" v-on:change="file" label="ExportChecks.json File input">file</v-file-input>
+								<v-file-input truncate-length="15" class="" v-on:change="fileup" label="ExportChecks.json File input">file</v-file-input>
 								<v-btn class="" v-on:click="select">select</v-btn>
 								<v-btn class="" v-on:click="clear">clear</v-btn>
-							</v-col>
-						</v-row>
+							</v-col> </v-row
+						>fileup
 						<table class="test">
 							<thead>
 								<th>No.</th>
@@ -124,8 +124,10 @@ export default {
 			this.loadedData.tlist = this.main.convert(this.loadedData.list);
 			this.overlay = false;
 		},
-		file(event) {
+		fileup(event) {
 			this.overlay = true;
+			console.log('CCCCCCCCCCCCCCCCCCCCCCCevent:' + event);
+			console.log(event);
 			event.preventDefault();
 			const files = event.target.files;
 			const file = files[0];

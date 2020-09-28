@@ -22,6 +22,8 @@ export class BookmarkletBasePage {
 		v.a(v.b, v.hr());
 		v.a(v.b, v.br());
 		v.a(v.b, v.ct('span', '下のリンクに飛んで、ブックマークレットを起動（ブックマークをクリック）してください'));
+		v.a(v.b, v.br());
+		v.a(v.b, v.br());
 		const a2 = v.an(targetOrigin);
 		v.a(v.b, a2);
 		a2.href = targetOrigin;
