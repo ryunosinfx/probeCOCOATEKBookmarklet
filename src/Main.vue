@@ -125,6 +125,10 @@ export default {
 			this.overlay = false;
 		},
 		fileup(file) {
+			if (!file) {
+				this.hash = '';
+				return;
+			}
 			this.overlay = true;
 			console.log('CCCCCCCCCCCCCCCCCCCCCCCevent:' + file);
 			console.log(file);

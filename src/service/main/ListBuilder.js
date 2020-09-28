@@ -2,7 +2,11 @@ import { TimeUtil } from '../util/TimeUtil';
 export class ListBuilder {
 	constructor() {}
 	build(list, filterHash) {
+		console.log('	build(list, filterHash)');
+		console.log(filterHash);
 		const hashes = this.loadHash(filterHash);
+
+		console.log(hashes);
 		const retList = [];
 		const map = {};
 		const keylist = [];
