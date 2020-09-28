@@ -86,7 +86,8 @@
 /* 1 */,
 /* 2 */,
 /* 3 */,
-/* 4 */
+/* 4 */,
+/* 5 */
 /***/,function(e,t){
 /*!
  * Chai - flag utility
@@ -113,8 +114,7 @@
  */
 e.exports=function(e,t,r){var n=e.__flags||(e.__flags=Object.create(null));if(3!==arguments.length)return n[t];n[t]=r};
 /***/},
-/* 5 */
-/* 6 */,
+/* 6 */
 /* 7 */,
 /* 8 */
 /***/,function(e,t,r){"use strict";
@@ -407,7 +407,7 @@ if(null===e.parentNode)return 0;e.parentNode.removeChild(e)}(r)};return n(e),fun
  * @name addLengthGuard
  */e.exports=function(e,t,n){return r.configurable?(Object.defineProperty(e,"length",{get:function(){if(n)throw Error("Invalid Chai property: "+t+'.length. Due to a compatibility issue, "length" cannot directly follow "'+t+'". Use "'+t+'.lengthOf" instead.');throw Error("Invalid Chai property: "+t+'.length. See docs for proper usage of "'+t+'".')}}),e):e}},
 /* 25 */
-/***/function(e,t,r){var n=r(16),o=r(4),i=r(54),a=r(23),s=["__flags","__methods","_obj","assert"];e.exports=function(e,t){return a()?new Proxy(e,{get:function e(r,a){
+/***/function(e,t,r){var n=r(16),o=r(5),i=r(54),a=r(23),s=["__flags","__methods","_obj","assert"];e.exports=function(e,t){return a()?new Proxy(e,{get:function e(r,a){
 // This check is here because we should not throw errors on Symbol properties
 // such as `Symbol.toStringTag`.
 // The values for which an error should be thrown can be configured using
@@ -6145,7 +6145,7 @@ t.objDisplay=r(52),
 /*!
  * Flag utility
  */
-t.flag=r(4),
+t.flag=r(5),
 /*!
  * Flag transferring utility
  */
@@ -6413,7 +6413,7 @@ u=void 0===c.p?[]:{},n[s]=u,n=n[s]}}}(e,r,o(t)),e}}},
 /*!
  * Module dependencies
  */
-var n=r(4);
+var n=r(5);
 /**
  * ### .test(object, expression)
  *
@@ -6444,7 +6444,7 @@ var n=r(4);
  * @name expectTypes
  * @api public
  */
-var n=r(50),o=r(4),i=r(35);e.exports=function(e,t){var r=o(e,"message"),a=o(e,"ssfi");r=r?r+": ":"",e=o(e,"object"),(t=t.map((function(e){return e.toLowerCase()}))).sort();// Transforms ['lorem', 'ipsum'] into 'a lorem, or an ipsum'
+var n=r(50),o=r(5),i=r(35);e.exports=function(e,t){var r=o(e,"message"),a=o(e,"ssfi");r=r?r+": ":"",e=o(e,"object"),(t=t.map((function(e){return e.toLowerCase()}))).sort();// Transforms ['lorem', 'ipsum'] into 'a lorem, or an ipsum'
 var s=t.map((function(e,r){var n=~["a","e","i","o","u"].indexOf(e.charAt(0))?"an":"a";return(t.length>1&&r===t.length-1?"or ":"")+n+" "+e})).join(", "),u=i(e).toLowerCase();if(!t.some((function(e){return u===e})))throw new n(r+"object tested must be "+s+", but "+u+" given",void 0,a)}},
 /* 100 */
 /***/function(e,t,r){
@@ -6456,7 +6456,7 @@ var s=t.map((function(e,r){var n=~["a","e","i","o","u"].indexOf(e.charAt(0))?"an
 /*!
  * Module dependencies
  */
-var n=r(4),o=r(51),i=r(52);
+var n=r(5),o=r(51),i=r(52);
 /**
  * ### .getMessage(object, message, negateMessage)
  *
@@ -6676,7 +6676,7 @@ function h(e){if(function(e){return"undefined"!=typeof Symbol&&"object"==typeof 
  * Copyright(c) 2012-2014 Jake Luer <jake@alogicalparadox.com>
  * MIT Licensed
  */
-var n=r(11),o=r(4),i=r(23),a=r(12);
+var n=r(11),o=r(5),i=r(23),a=r(12);
 /**
  * ### .addProperty(ctx, name, getter)
  *
@@ -6723,7 +6723,7 @@ i()||o(this,"lockSsfi")||o(this,"ssfi",e);var t=r.call(this);if(void 0!==t)retur
  * Copyright(c) 2012-2014 Jake Luer <jake@alogicalparadox.com>
  * MIT Licensed
  */
-var n=r(24),o=r(11),i=r(4),a=r(25),s=r(12);
+var n=r(24),o=r(11),i=r(5),a=r(25),s=r(12);
 /**
  * ### .addMethod(ctx, name, method)
  *
@@ -6768,7 +6768,7 @@ i(this,"lockSsfi")||i(this,"ssfi",u);var e=r.apply(this,arguments);if(void 0!==e
  * Copyright(c) 2012-2014 Jake Luer <jake@alogicalparadox.com>
  * MIT Licensed
  */
-var n=r(11),o=r(4),i=r(23),a=r(12);
+var n=r(11),o=r(5),i=r(23),a=r(12);
 /**
  * ### .overwriteProperty(ctx, name, fn)
  *
@@ -6826,7 +6826,7 @@ var t=o(this,"lockSsfi");o(this,"lockSsfi",1);var s=r(u).call(this);if(o(this,"l
  * Copyright(c) 2012-2014 Jake Luer <jake@alogicalparadox.com>
  * MIT Licensed
  */
-var n=r(24),o=r(11),i=r(4),a=r(25),s=r(12);
+var n=r(24),o=r(11),i=r(5),a=r(25),s=r(12);
 /**
  * ### .overwriteMethod(ctx, name, fn)
  *
@@ -6885,7 +6885,7 @@ var e=i(this,"lockSsfi");i(this,"lockSsfi",1);var t=r(c).apply(this,arguments);i
 /*!
  * Module dependencies
  */
-var n=r(24),o=r(11),i=r(4),a=r(25),s=r(12),u="function"==typeof Object.setPrototypeOf,c=function(){},l=Object.getOwnPropertyNames(c).filter((function(e){var t=Object.getOwnPropertyDescriptor(c,e);// Note: PhantomJS 1.x includes `callee` as one of `testFn`'s own properties,
+var n=r(24),o=r(11),i=r(5),a=r(25),s=r(12),u="function"==typeof Object.setPrototypeOf,c=function(){},l=Object.getOwnPropertyNames(c).filter((function(e){var t=Object.getOwnPropertyDescriptor(c,e);// Note: PhantomJS 1.x includes `callee` as one of `testFn`'s own properties,
 // but then returns `undefined` as the property descriptor for `callee`. As a
 // workaround, we perform an otherwise unnecessary type-check for `propDesc`,
 // and then filter it out if it's not an object as it should be.

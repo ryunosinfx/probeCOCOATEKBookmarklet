@@ -101,7 +101,7 @@ for(let t=0;t<o;t++)e.push(String.fromCharCode(n[t].replace("\\u","0x")));return
 // ESM COMPAT FLAG
 n.r(e);
 // EXTERNAL MODULE: ./src/service/constants/Constants.js
-var o=n(7),r=n(2),s=n(5),i=n(19);
+var o=n(3),r=n(2),s=n(6),i=n(19);
 // EXTERNAL MODULE: ./src/service/util/V.js
 // CONCATENATED MODULE: ./src/index.js
 const a=r.a.gi(["Error"]);(()=>{a.init(),a.b.style.height="100%",a.b.style.padding="0",a.b.style.margin="0",a.init();s.a.buildChild(o.c,1);s.a.setOnMessage(async t=>{console.log("main e:"+t+" /"+typeof t),console.log(t);const e=!!t.data.isText,n=await
@@ -123,10 +123,17 @@ return console.log("main data:"+n+" /"+typeof n),console.log(n),n}),s.a.setOnLoa
 /***/function(t,e,n){"use strict";
 /* harmony export (binding) */n.d(e,"a",(function(){return s}));const o="http://www.w3.org/1999/xhtml";document.createElement=(t,e)=>document.createElementNS(o,t,e);const r={v:null};class s{static gi(t=[]){r.v||(r.v=new s);for(let e of t)r.v.r(e);return r.v}constructor(){const t=document;this.d=t,this.w=window,this.x=this.tn("html"),this.b=this.tn("body"),this.h=this.tn("head")}init(){if(this.b){for(let t of this.b.children)this.b.removeChild(t);for(let t of this.b.children)this.b.removeChild(t)}else{const t=this.d.implementation.createDocumentType("html","",""),e=this.d.implementation.createDocument(o,"html",t),n=e.createElementNS(o,"head"),r=e.createElementNS(o,"body"),s=e.documentElement;this.a(s,n),this.a(s,r),this.d.appendChild(s,1),s.setAttribute("xmlns",o),this.b=this.tn("body"),this.h=this.tn("head")}}c(t){return this.d.createElementNS(o,t)}a(t,e){return t.appendChild(e)}b(t,e,n){t.addEventListener(e,n)}gid(t){return this.d.getElementById(t)}ct(t,e,n){const o=this.c(t);return o.textContent=e,o.className=n||"",o}r(t){const e=this.d.getElementsByTagName(t);if(!e)return e;for(let t of e)this.re(t)}re(t){const e=t.parent?t.parent:this.d;t.parent?e.removeChild(t):t.remove()}tn(t){return this.d.getElementsByTagName(t)[0]}h1(t,e){return this.ct("h1",t,e)}hr(t,e){return this.ct("hr",t,e)}pre(t,e){return this.ct("pre",t,e)}div(t){return this.ct("div","",t)}br(t){return this.ct("br","",t)}an(t,e){return this.ct("a",t,e)}iframe(t,e){const n=this.ct("iframe","",t);return n.setAttribute("src",e),n}}
 /***/},
-/***/5:
+/***/3:
+/***/function(t,e,n){"use strict";
+/* harmony export (binding) */n.d(e,"d",(function(){return o})),
+/* harmony export (binding) */n.d(e,"c",(function(){return r})),
+/* harmony export (binding) */n.d(e,"a",(function(){return s})),
+/* unused harmony export ns */
+/* harmony export (binding) */n.d(e,"b",(function(){return i}));const o="https://covid19radar-jpn-prod.azureedge.net",r="https://ryunosinfx.github.io/probeCOCOATEKBookmarklet/",s="https://ryunosinfx.github.io",i="https://covid19radar-jpn-prod.azureedge.net/c19r/440/list.json"},
+/***/6:
 /***/function(t,e,n){"use strict";
 /* harmony export (binding) */n.d(e,"a",(function(){return u}));
-/* harmony import */var o=n(2),r=n(13),s=n(7);
+/* harmony import */var o=n(2),r=n(13),s=n(3);
 /* harmony import */const i=o.a.gi(),a={oM:async()=>{},oL:()=>{},i:null},c="message",l={};class u{static init(){console.log("PostMessager.init"),i.w.addEventListener(c,async t=>{const e=t.data;// console.log('f.oMc a d:' + d);
 if(e&&"string"==typeof e&&0===e.indexOf("{"))try{const n=JSON.parse(e);// console.log('f.oMc b o.hash:' + o.hash);
 if(n.hash){const e=l[n.hash];// console.log('f.oMc c j:' + j);
@@ -139,12 +146,5 @@ a.oM(t)}}catch(t){console.log(t)}},0)}static buildChild(t,e){i.w.addEventListene
 a.i&&window.parent===window&&(
 // console.log('postToChild b msg:' + msg);
 console.log("PostMessager postToChild f.i"),console.log(a.i),a.i.contentWindow.postMessage(t,s.a))}static postToParent(t){return new Promise(async e=>{console.log("PostMessager postToParent START msg:"+t+" /"+typeof t);const n=await r.a.sha256(Date.now+"#"+Math.random(Date.now),2);console.log("PostMessager postToParent hash:"+n),l[n]=e,t.hash=n,window.parent!==window&&window.parent.postMessage(JSON.stringify(t),"*"),console.log("PostMessager postToParent POST!"),setTimeout(()=>{l[n]&&(console.log("PostMessager postToParent TIMEOUT!"),e(null),delete l[n])},6e4)})}static isChildFrame(){return window.parent!==window}}
-/***/},
-/***/7:
-/***/function(t,e,n){"use strict";
-/* unused harmony export targetOrigin */
-/* harmony export (binding) */n.d(e,"c",(function(){return o})),
-/* harmony export (binding) */n.d(e,"a",(function(){return r})),
-/* unused harmony export ns */
-/* harmony export (binding) */n.d(e,"b",(function(){return s}));const o="https://ryunosinfx.github.io/probeCOCOATEKBookmarklet/",r="https://ryunosinfx.github.io",s="https://covid19radar-jpn-prod.azureedge.net/c19r/440/list.json"}
+/***/}
 /******/});

@@ -19,6 +19,7 @@
 								<v-textarea auto-grow="true" label="select Hash" clearable clear-icon="mdi-close-circle" v-model="hash"></v-textarea>
 							</v-col>
 							<v-col md="1">
+								<v-file-input truncate-length="15" class="" v-on:change="file" label="ExportChecks.json File input">file</v-file-input>
 								<v-btn class="" v-on:click="select">select</v-btn>
 								<v-btn class="" v-on:click="clear">clear</v-btn>
 							</v-col>
@@ -122,6 +123,19 @@ export default {
 			this.overlay = true;
 			this.loadedData.tlist = this.main.convert(this.loadedData.list);
 			this.overlay = false;
+		},
+		file(event) {
+			this.overlay = true;
+			event.preventDefault();
+			const files = event.target.files;
+			const file = files[0];
+			const reader = new FileReader();
+			reader.addEventListener('load', (event) => {
+				this.hash = event.target.result;
+				this.loadedData.tlist = this.main.convert(this.loadedData.list, this.hash);
+				this.overlay = false;
+			});
+			reader.readAsDataURL(file);
 		},
 	},
 };
